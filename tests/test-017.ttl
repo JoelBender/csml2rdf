@@ -1,0 +1,42 @@
+@prefix bacnet: <http://data.ashrae.org/bacnet/2020#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bacnet:TestSequence1 a sh:NodeShape ;
+    rdfs:subClassOf bacnet:Sequence ;
+    sh:property [ a sh:PropertyShape ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:list-of-cov-notifications ] ;
+    sh:xone ( [ sh:property [ sh:minCount 1 ;
+                        sh:node bacnet:TestSequence1.ListOfCovNotificationsSequence ;
+                        sh:path ( bacnet:list-of-cov-notifications [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ] ] [ sh:property [ sh:hasValue () ;
+                        sh:minCount 1 ;
+                        sh:path bacnet:list-of-cov-notifications ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path bacnet:list-of-cov-notifications ] ] ) .
+
+bacnet:TestSequence1.ListOfCovNotifications a bacnet:SequenceOf ;
+    bacnet:memberType bacnet:TestSequence1.ListOfCovNotificationsSequence .
+
+bacnet:TestSequenceOf1 a bacnet:SequenceOf ;
+    bacnet:memberType bacnet:TestSequenceOf1Sequence .
+
+bacnet:TestSequenceOf1Sequence a sh:NodeShape ;
+    rdfs:subClassOf bacnet:Sequence ;
+    sh:property [ a sh:PropertyShape ;
+            sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:some-unsigned ] .
+
+bacnet:TestSequence1.ListOfCovNotificationsSequence a sh:NodeShape ;
+    rdfs:subClassOf bacnet:Sequence ;
+    sh:property [ a sh:PropertyShape ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:some-object-identifier ;
+            sh:pattern "^[A-Za-z0-9-]+,[1-9][0-9]*$" ] .
+

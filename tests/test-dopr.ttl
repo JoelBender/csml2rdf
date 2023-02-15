@@ -1,0 +1,35 @@
+@prefix bacnet: <http://data.ashrae.org/bacnet/2020#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bacnet:Property a rdfs:Class,
+        sh:NodeShape ;
+    rdfs:subClassOf bacnet:Object ;
+    sh:property [ a sh:PropertyShape ;
+            sh:class bacnet:DeviceObjectPropertyReference ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:hasExternalReference ] .
+
+bacnet:DeviceObjectPropertyReference a sh:NodeShape ;
+    bacnet:x-error "property-identifier missing property shape: PropertyIdentifier" ;
+    rdfs:subClassOf bacnet:Sequence ;
+    sh:property [ a sh:PropertyShape ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:object-identifier ;
+            sh:pattern "^[A-Za-z0-9-]+,[1-9][0-9]*$" ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path bacnet:property-array-index ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path bacnet:device-identifier ;
+            sh:pattern "^[A-Za-z0-9-]+,[1-9][0-9]*$" ] .
+

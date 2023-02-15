@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Unsigned name="0-Unsigned8" minimum="0" maximum="255"/>
+
+        <Sequence name="0-BACnetTestSequence">
+            <Unsigned name="floor-number" contextTag="0" type="0-Unsigned8"/>
+        </Sequence>
+    </Definitions>
+</CSML>

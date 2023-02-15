@@ -1,0 +1,28 @@
+@prefix bacnet: <http://data.ashrae.org/bacnet/2020#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bacnet:Action a rdfs:Class ;
+    bacnet:memberClass bacnet:ActionEnumerationValue ;
+    rdfs:subClassOf bacnet:EnumerationKind .
+
+bacnet:ActionEnumerationValue a rdfs:Class ;
+    rdfs:subClassOf bacnet:EnumerationValue .
+
+bacnet:Action.direct a bacnet:ActionEnumerationValue ;
+    bacnet:name "direct" ;
+    bacnet:value "0"^^xsd:nonNegativeInteger .
+
+bacnet:Action.reverse a bacnet:ActionEnumerationValue ;
+    bacnet:name "reverse" ;
+    bacnet:value "1"^^xsd:nonNegativeInteger .
+
+bacnet:TestSequence a sh:NodeShape ;
+    rdfs:subClassOf bacnet:Sequence ;
+    sh:property [ a sh:PropertyShape ;
+            sh:class bacnet:ActionEnumerationValue ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:some-action ] .
+

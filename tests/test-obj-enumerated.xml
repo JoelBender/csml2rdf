@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Enumerated name="0-BACnetObjectType">
+            <NamedValues>
+                <Unsigned name="analog-input" value="0"/>
+            </NamedValues>
+        </Enumerated>
+
+        <Object name="0-AnalogInputObject">
+            <Enumerated name="object-type" propertyIdentifier="79" type="0-BACnetObjectType" value="analog-input" variability="constant" writable="false"/>
+        </Object>
+    </Definitions>
+</CSML>
+

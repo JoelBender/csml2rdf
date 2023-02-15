@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Choice name="TestChoice">
+            <Choices>
+                <Integer name="some-integer"/>
+                <Sequence name="some-sequence">
+                    <Null name="some-null"/>
+                </Sequence>
+            </Choices>
+        </Choice>
+    </Definitions>
+</CSML>
+

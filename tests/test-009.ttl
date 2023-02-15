@@ -1,0 +1,20 @@
+@prefix bacnet: <http://data.ashrae.org/bacnet/2020#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bacnet:TestSequence a sh:NodeShape ;
+    rdfs:subClassOf bacnet:Sequence ;
+    sh:property [ a sh:PropertyShape ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:week-n-day ;
+            sh:pattern "^([1-9][0-9]*|[*]),([1-9][0-9]*|[*]),([1-9][0-9]*|[*])$" ] .
+
+bacnet:WeekNDay a sh:NodeShape ;
+    bacnet:comment "first octet..."@en ;
+    bacnet:maximumLength 3 ;
+    bacnet:minimumLength 3 ;
+    rdfs:subClassOf bacnet:OctetString .
+

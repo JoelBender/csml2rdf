@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <OctetString name="0-BACnetWeekNDay"
+            minimumLength="3"
+            maximumLength="3"
+            comment="first octet..."
+        />
+        <Sequence name="0-BACnetTestSequence">
+            <OctetString name="some-blob"/>
+            <OctetString name="week-n-day" type="0-BACnetWeekNDay"/>
+            <OctetString name="another-blob"
+                maximumLength="6"
+                optional="true"
+                context="4"
+                comment="this is a long line of text"
+            />
+        </Sequence>
+    </Definitions>
+</CSML>

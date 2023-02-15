@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Sequence name="0-TestSequence1">
+            <BitString name="some-bitstring">
+                <NamedBits>
+                    <Bit name="monday" bit="0"/>
+                    <Bit name="tuesday" bit="1"/>
+                </NamedBits>
+            </BitString>
+        </Sequence>
+    </Definitions>
+</CSML>

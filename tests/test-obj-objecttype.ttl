@@ -1,0 +1,25 @@
+@prefix bacnet: <http://data.ashrae.org/bacnet/2020#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bacnet:AnalogInputObject a rdfs:Class,
+        sh:NodeShape ;
+    rdfs:subClassOf bacnet:Object ;
+    sh:property [ a sh:PropertyShape ;
+            sh:hasValue bacnet:ObjectType.analog-input ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:object-type ] .
+
+bacnet:ObjectType a rdfs:Class ;
+    bacnet:memberClass bacnet:ObjectTypeEnumerationValue ;
+    rdfs:subClassOf bacnet:EnumerationKind .
+
+bacnet:ObjectTypeEnumerationValue a rdfs:Class ;
+    rdfs:subClassOf bacnet:EnumerationValue .
+
+bacnet:ObjectType.analog-input a bacnet:ObjectTypeEnumerationValue ;
+    bacnet:name "analog-input" ;
+    bacnet:value "0"^^xsd:nonNegativeInteger .
+

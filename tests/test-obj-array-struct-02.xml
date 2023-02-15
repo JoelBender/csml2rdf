@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Sequence name="0-BACnetNameValue">
+            <String name="name" contextTag="0"/>
+            <Any name="value" optional="true" comment="value is limited to primitve datatypes and BACnetDateTime"/>
+        </Sequence>
+
+        <Object name="0-AnalogInputObject">
+            <Array memberType="0-BACnetNameValue" name="tags" optional="true" propertyIdentifier="486" variability="configuration-setting"/>
+        </Object>
+    </Definitions>
+</CSML>
+

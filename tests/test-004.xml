@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Integer name="0-INTEGER16" minimum="-32768" maximum="32767"/>
+
+        <Sequence name="0-BACnetTestSequence">
+            <Integer name="count" contextTag="0" type="0-INTEGER16"/>
+        </Sequence>
+    </Definitions>
+</CSML>

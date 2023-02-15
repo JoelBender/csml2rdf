@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Object name="0-AnalogInputObject">
+            <Boolean name="out-of-service" propertyIdentifier="81" variability="operation-setting"/>
+        </Object>
+    </Definitions>
+</CSML>
+

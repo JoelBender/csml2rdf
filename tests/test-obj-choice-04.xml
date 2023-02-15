@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <BitString name="0-BACnetLogStatus" length="3">
+            <NamedBits>
+                <Bit name="log-disabled" bit="0"/>
+                <Bit name="buffer-purged" bit="1"/>
+                <Bit name="log-interrupted" bit="2"/>
+            </NamedBits>
+        </BitString>
+
+        <Sequence name="0-Error">
+            <Enumerated name="error-class" minimum="64" maximum="65535">
+                <NamedValues>
+                    <Unsigned name="device" value="0"/>
+                    <Unsigned name="object" value="1"/>
+                    <Unsigned name="property" value="2"/>
+                </NamedValues>
+            </Enumerated>
+            <Enumerated name="error-code" minimum="256" maximum="65535">
+                <NamedValues>
+                    <Unsigned name="abort-apdu-too-long" value="123"/>
+                    <Unsigned name="abort-application-exceeded-reply-time" value="124"/>
+                    <Unsigned name="abort-buffer-overflow" value="51"/>
+                </NamedValues>
+            </Enumerated>
+        </Sequence>
+
+        <Choice name="0-BACnetLogData">
+            <Choices>
+                <BitString name="log-status" contextTag="0" type="0-BACnetLogStatus"/>
+                <SequenceOf name="log-data" contextTag="1">
+                    <MemberTypeDefinition>
+                        <Choice>
+                            <Choices>
+                                <Boolean name="boolean-value" contextTag="0"/>
+                                <Real name="real-value" contextTag="1"/>
+                                <Enumerated name="enumerated-value" contextTag="2" comment="Optionally limited to 32 bits"/>
+                                <Unsigned name="unsigned-value" contextTag="3" comment="Optionally limited to 32 bits"/>
+                                <Integer name="integer-value" contextTag="4" comment="Optionally limited to 32 bits"/>
+                                <BitString name="bitstring-value" contextTag="5" comment="Optionally limited to 32 bits"/>
+                                <Null name="null-value" contextTag="6"/>
+                                <Sequence name="failure" contextTag="7" type="0-Error"/>
+                                <Any name="any-value" contextTag="8"/>
+                            </Choices>
+                        </Choice>
+                    </MemberTypeDefinition>
+                </SequenceOf>
+                <Real name="time-change" contextTag="2"/>
+            </Choices>
+        </Choice>
+
+        <Sequence name="0-BACnetLogMultipleRecord">
+            <DateTime name="timestamp" contextTag="0"/>
+            <Choice name="log-data" contextTag="1" type="0-BACnetLogData"/>
+        </Sequence>
+    </Definitions>
+</CSML>
+

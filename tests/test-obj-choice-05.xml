@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Choice name="0-BACnetEventParameter">
+            <Choices>
+                <Sequence name="change-of-bitstring" contextTag="0">
+                    <Unsigned name="time-delay" contextTag="0"/>
+                    <BitString name="bitmask" contextTag="1"/>
+                    <SequenceOf name="list-of-bitstring-values" memberType="BitString" contextTag="2"/>
+                </Sequence>
+            </Choices>
+        </Choice>
+        <Sequence name="0-TestSequence">
+            <Choice name="some-event-parameter" type="0-BACnetEventParameter"/>
+        </Sequence>
+    </Definitions>
+</CSML>
+

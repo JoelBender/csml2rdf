@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Object name="0-AnalogInputObject">
+            <Array maximumSize="3" memberType="String" minimumSize="3" name="event-message-texts" optional="true" propertyIdentifier="351" variability="status" writable="false"/>
+        </Object>
+    </Definitions>
+</CSML>
+

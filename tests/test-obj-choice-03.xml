@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Unsigned name="0-Unsigned16" minimum="0" maximum="65535"/>
+
+        <Sequence name="0-BACnetDeviceObjectReference">
+            <ObjectIdentifier name="device-identifier" contextTag="0" optional="true"/>
+            <ObjectIdentifier name="object-identifier" contextTag="1"/>
+        </Sequence>
+
+        <Sequence name="0-BACnetDeviceObjectPropertyReference">
+            <ObjectIdentifier name="object-identifier" contextTag="0"/>
+            <Enumerated name="property-identifier" contextTag="1" type="0-BACnetPropertyIdentifier"/>
+            <Unsigned name="property-array-index" contextTag="2" optional="true" comment="used only with array datatype if omitted with an array then the entire array is referenced"/>
+            <ObjectIdentifier name="device-identifier" contextTag="3" optional="true"/>
+        </Sequence>
+
+        <Choice name="0-BACnetEventParameter">
+            <Choices>
+                <Sequence name="change-of-bitstring" contextTag="0">
+                    <Unsigned name="time-delay" contextTag="0"/>
+                    <BitString name="bitmask" contextTag="1"/>
+                    <SequenceOf name="list-of-bitstring-values" memberType="BitString" contextTag="2"/>
+                </Sequence>
+                <Sequence name="extended" contextTag="9">
+                    <Unsigned name="vendor-id" contextTag="0" type="0-Unsigned16"/>
+                    <Unsigned name="extended-event-type" contextTag="1"/>
+                    <SequenceOf name="parameters" contextTag="2">
+                        <MemberTypeDefinition>
+                            <Choice>
+                                <Choices>
+                                    <Null name="null"/>
+                                    <Real name="real"/>
+                                    <Unsigned name="unsigned"/>
+                                    <Boolean name="boolean"/>
+                                    <Integer name="integer"/>
+                                    <Double name="double"/>
+                                    <OctetString name="octetstring"/>
+                                    <String name="characterstring"/>
+                                    <BitString name="bitstring"/>
+                                    <Enumerated name="enumerated"/>
+                                    <Date name="date"/>
+                                    <Time name="time"/>
+                                    <ObjectIdentifier name="objectidentifier"/>
+                                    <Sequence name="reference" contextTag="0" type="0-BACnetDeviceObjectPropertyReference"/>
+                                </Choices>
+                            </Choice>
+                        </MemberTypeDefinition>
+                    </SequenceOf>
+                </Sequence>
+                <Sequence name="buffer-ready" contextTag="10">
+                    <Unsigned name="notification-threshold" contextTag="0"/>
+                    <Unsigned name="previous-notification-count" contextTag="1" type="0-Unsigned32"/>
+                </Sequence>
+                <Sequence name="change-of-timer" contextTag="22">
+                    <Unsigned name="time-delay" contextTag="0"/>
+                    <SequenceOf name="alarm-value" contextTag="1" memberType="0-BACnetTimerState"/>
+                    <Sequence name="update-time-reference" contextTag="2" type="0-BACnetDeviceObjectReference"/>
+                </Sequence>
+            </Choices>
+        </Choice>
+
+        <Object name="0-EventEnrollmentObject">
+            <Choice name="event-parameters" propertyIdentifier="83" type="0-BACnetEventParameter"/>
+        </Object>
+    </Definitions>
+</CSML>
+

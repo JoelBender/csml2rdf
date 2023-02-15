@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <OctetString name="0-SmallOctetString" minimumLength="1"/>
+        <Sequence name="0-BACnetTestSequence">
+            <OctetString name="octet-string" type="0-SmallOctetString"/>
+        </Sequence>
+    </Definitions>
+</CSML>

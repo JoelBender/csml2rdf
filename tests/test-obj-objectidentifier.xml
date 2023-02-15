@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Object name="0-AnalogInputObject">
+            <ObjectIdentifier name="object-identifier" propertyIdentifier="75"/>
+        </Object>
+    </Definitions>
+</CSML>
+

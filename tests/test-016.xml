@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Sequence name="0-TestSequence2">
+            <SequenceOf name="value" memberType="0-TestSequence1"/>
+        </Sequence>
+        <Sequence name="0-TestSequence1">
+            <Null name="some-null"/>
+        </Sequence>
+    </Definitions>
+</CSML>
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <!--
+        Define a test sequence with a single optional null.
+    -->
+    <Definitions>
+        <Sequence name="0-BACnetTestSequence">
+            <Null name="null" optional="true"/>
+        </Sequence>
+    </Definitions>
+</CSML>

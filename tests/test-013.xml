@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <SequenceOf name="0-GetAlarmSummary-ACK">
+            <MemberTypeDefinition>
+                <Sequence>
+                    <ObjectIdentifier name="object-identifier"/>
+                </Sequence>
+            </MemberTypeDefinition>
+        </SequenceOf>
+    </Definitions>
+</CSML>
+
+

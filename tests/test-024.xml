@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Sequence name="0-TestSequence1">
+            <Choice name="some-choice" type="0-AtomicWriteFile-ACK"/>
+        </Sequence>
+        <Choice name="0-AtomicWriteFile-ACK">
+            <Choices>
+                <Integer name="file-start-position" contextTag="0"/>
+                <Integer name="file-start-record" contextTag="1"/>
+            </Choices>
+        </Choice>
+    </Definitions>
+</CSML>
+

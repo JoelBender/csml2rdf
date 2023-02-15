@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Enumerated name="0-BACnetAction">
+            <NamedValues>
+                <Unsigned name="direct" value="0"/>
+                <Unsigned name="reverse" value="1"/>
+            </NamedValues>
+        </Enumerated>
+
+        <Sequence name="0-BACnetTestSequence">
+            <Enumerated name="some-action" type="0-BACnetAction" value="direct"/>
+        </Sequence>
+    </Definitions>
+</CSML>

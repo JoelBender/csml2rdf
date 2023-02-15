@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+
+        <Choice name="Range">
+            <Choices>
+                <Sequence name="by-position" contextTag="3">
+                    <Unsigned name="reference-index"/>
+                    <Integer name="count"/>
+                </Sequence>
+                <Sequence name="by-sequence-number" contextTag="6">
+                    <Unsigned name="reference-sequence-number"/>
+                    <Integer name="count"/>
+                </Sequence>
+                <Sequence name="by-time" contextTag="7">
+                    <DateTime name="reference-time"/>
+                    <Integer name="count"/>
+                </Sequence>
+            </Choices>
+        </Choice>
+
+    </Definitions>
+</CSML>
+

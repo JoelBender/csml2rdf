@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <BitString name="0-BACnetStatusFlags" length="4">
+            <NamedBits>
+                <Bit name="in-alarm" bit="0"/>
+                <Bit name="fault" bit="1"/>
+                <Bit name="overridden" bit="2"/>
+                <Bit name="out-of-service" bit="3"/>
+            </NamedBits>
+        </BitString>
+
+        <Object name="0-AnalogInputObject">
+            <BitString name="status-flags" propertyIdentifier="111" type="0-BACnetStatusFlags" variability="status" writable="false"/>
+        </Object>
+    </Definitions>
+</CSML>
+

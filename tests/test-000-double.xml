@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Sequence name="0-BACnetTestSequence">
+            <Double name="double"/>
+        </Sequence>
+    </Definitions>
+</CSML>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Sequence name="0-TestSequence1">
+            <SequenceOf name="list-of-cov-notifications" contextTag="4">
+                <MemberTypeDefinition>
+                    <Sequence>
+                        <ObjectIdentifier name="some-object-identifier" contextTag="0"/>
+                    </Sequence>
+                </MemberTypeDefinition>
+            </SequenceOf>
+        </Sequence>
+        <SequenceOf name="0-TestSequenceOf1" contextTag="4">
+            <MemberTypeDefinition>
+                <Sequence>
+                    <Unsigned name="some-unsigned" contextTag="0"/>
+                </Sequence>
+            </MemberTypeDefinition>
+        </SequenceOf>
+    </Definitions>
+</CSML>
+

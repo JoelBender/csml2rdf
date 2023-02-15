@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Enumerated name="0-BACnetLightingOperation">
+            <NamedValues>
+                <Unsigned name="none" value="0"/>
+                <Unsigned name="fade-to" value="1"/>
+                <Unsigned name="ramp-to" value="2"/>
+                <Unsigned name="step-up" value="3"/>
+                <Unsigned name="step-down" value="4"/>
+                <Unsigned name="step-on" value="5"/>
+                <Unsigned name="step-off" value="6"/>
+                <Unsigned name="warn" value="7"/>
+                <Unsigned name="warn-off" value="8"/>
+                <Unsigned name="warn-relinquish" value="9"/>
+                <Unsigned name="stop" value="10"/>
+            </NamedValues>
+        </Enumerated>
+
+        <Sequence name="0-BACnetLightingCommand">
+            <Enumerated name="operation" contextTag="0" type="0-BACnetLightingOperation"/>
+            <Real name="target-level" contextTag="1" minimum="0.0" maximum="100.0" optional="true"/>
+            <Real name="ramp-rate" contextTag="2" minimum="0.1" maximum="100.0" optional="true"/>
+            <Real name="step-increment" contextTag="3" minimum="0.1" maximum="100.0" optional="true"/>
+            <Unsigned name="fade-time" contextTag="4" minimum="100" maximum="86400000" optional="true"/>
+            <Unsigned name="priority" contextTag="5" minimum="1" maximum="16" optional="true"/>
+        </Sequence>
+
+        <Choice name="0-BACnetChannelValue">
+            <Choices>
+                <Null name="null"/>
+                <Real name="real"/>
+                <Enumerated name="enumerated"/>
+                <Unsigned name="unsigned"/>
+                <Boolean name="boolean"/>
+                <Integer name="integer"/>
+                <Double name="double"/>
+                <Time name="time"/>
+                <String name="characterstring"/>
+                <OctetString name="octetstring"/>
+                <BitString name="bitstring"/>
+                <Date name="date"/>
+                <ObjectIdentifier name="objectidentifier"/>
+                <Sequence name="lighting-command" contextTag="0" type="0-BACnetLightingCommand"/>
+            </Choices>
+        </Choice>
+
+        <Object name="0-ChannelObject">
+            <Choice commandable="true" name="present-value" propertyIdentifier="85" type="0-BACnetChannelValue" variability="status" writable="true"/>
+        </Object>
+    </Definitions>
+</CSML>
+

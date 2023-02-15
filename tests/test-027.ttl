@@ -1,0 +1,26 @@
+@prefix bacnet: <http://data.ashrae.org/bacnet/2020#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bacnet:TestChoice a sh:NodeShape ;
+    rdfs:subClassOf bacnet:Choice ;
+    sh:xone ( [ sh:property [ a sh:PropertyShape ;
+                        sh:datatype xsd:integer ;
+                        sh:maxCount 1 ;
+                        sh:minCount 1 ;
+                        sh:path bacnet:some-integer ] ] [ sh:property [ a sh:PropertyShape ;
+                        sh:class bacnet:TestChoice.SomeSequence ;
+                        sh:maxCount 1 ;
+                        sh:minCount 1 ;
+                        sh:path bacnet:some-sequence ] ] ) .
+
+bacnet:TestChoice.SomeSequence a sh:NodeShape ;
+    rdfs:subClassOf bacnet:Sequence ;
+    sh:property [ a sh:PropertyShape ;
+            sh:hasValue bacnet:Null ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:some-null ] .
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Sequence name="0-BACnetDeviceObjectPropertyReference">
+            <ObjectIdentifier name="object-identifier" contextTag="0"/>
+            <Enumerated name="property-identifier" contextTag="1" type="0-BACnetPropertyIdentifier"/>
+            <Unsigned name="property-array-index" contextTag="2" optional="true"/>
+            <ObjectIdentifier name="device-identifier" contextTag="3" optional="true"/>
+        </Sequence>
+        <Object name="Property">
+            <Sequence name="hasExternalReference" contextTag="1" type="0-BACnetDeviceObjectPropertyReference"/>
+        </Object>
+    </Definitions>
+</CSML>
+

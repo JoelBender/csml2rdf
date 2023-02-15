@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+    <Definitions>
+        <Enumerated name="0-BACnetAction">
+            <NamedValues>
+                <Unsigned name="direct" value="0"/>
+                <Unsigned name="reverse" value="1"/>
+            </NamedValues>
+        </Enumerated>
+
+        <Sequence name="0-BACnetTestSequence">
+            <Integer name="snork"/>
+            <Enumerated name="action" contextTag="3" type="0-BACnetAction" optional="true"/>
+            <Enumerated name="acknowledgment-filter" contextTag="0">
+                <NamedValues>
+                    <Unsigned name="all" value="0"/>
+                    <Unsigned name="acked" value="1"/>
+                    <Unsigned name="not-acked" value="2"/>
+                </NamedValues>
+            </Enumerated>
+        </Sequence>
+    </Definitions>
+</CSML>
