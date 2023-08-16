@@ -6,6 +6,7 @@
 
 bacnet:AnalogInputObject a rdfs:Class,
         sh:NodeShape ;
+    rdfs:label "AnalogInputObject" ;
     rdfs:subClassOf bacnet:Object ;
     sh:property [ a sh:PropertyShape ;
             sh:maxCount 1 ;
@@ -20,10 +21,12 @@ bacnet:AnalogInputObject a rdfs:Class,
 
 bacnet:StatusFlags a rdfs:Class,
         sh:NodeShape ;
+    rdfs:label "StatusFlags" ;
     bacnet:memberClass bacnet:StatusFlagsNamedBits ;
     rdfs:subClassOf bacnet:Bitstring .
 
 bacnet:StatusFlagsNamedBits a rdfs:Class ;
+    rdfs:label "StatusFlagsNamedBits" ;
     rdfs:subClassOf bacnet:NamedBits .
 
 bacnet:StatusFlags.fault a bacnet:StatusFlagsNamedBits ;

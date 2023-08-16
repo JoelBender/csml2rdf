@@ -6,16 +6,19 @@
 
 bacnet:LogStatus a rdfs:Class,
         sh:NodeShape ;
+    rdfs:label "LogStatus" ;
     bacnet:memberClass bacnet:LogStatusNamedBits ;
     rdfs:subClassOf bacnet:Bitstring .
 
 bacnet:LogStatusNamedBits a rdfs:Class ;
+    rdfs:label "LogStatusNamedBits" ;
     rdfs:subClassOf bacnet:NamedBits .
 
 bacnet:LogData.LogData a bacnet:SequenceOf ;
     bacnet:memberType bacnet:LogData.LogDataChoice .
 
 bacnet:LogMultipleRecord a sh:NodeShape ;
+    rdfs:label "LogMultipleRecord" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:class bacnet:LogData ;
@@ -42,6 +45,7 @@ bacnet:LogStatus.log-interrupted a bacnet:LogStatusNamedBits ;
     bacnet:name "log-interrupted" .
 
 bacnet:Error a sh:NodeShape ;
+    rdfs:label "Error" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:class bacnet:EnumerationValue ;
@@ -55,6 +59,7 @@ bacnet:Error a sh:NodeShape ;
             sh:path bacnet:error-class ] .
 
 bacnet:LogData a sh:NodeShape ;
+    rdfs:label "LogData" ;
     rdfs:subClassOf bacnet:Choice ;
     sh:xone ( [ a sh:NodeShape ;
                 sh:property [ a sh:PropertyShape ;
@@ -83,6 +88,7 @@ bacnet:LogData a sh:NodeShape ;
                         sh:path bacnet:time-change ] ] ) .
 
 bacnet:LogData.LogDataChoice a sh:NodeShape ;
+    rdfs:label "LogData.LogDataChoice" ;
     rdfs:subClassOf bacnet:Choice ;
     sh:xone ( [ sh:property [ a sh:PropertyShape ;
                         sh:datatype xsd:boolean ;

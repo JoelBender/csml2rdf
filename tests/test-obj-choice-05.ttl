@@ -5,6 +5,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bacnet:TestSequence a sh:NodeShape ;
+    rdfs:label "TestSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:class bacnet:EventParameter ;
@@ -13,6 +14,7 @@ bacnet:TestSequence a sh:NodeShape ;
             sh:path bacnet:some-event-parameter ] .
 
 bacnet:EventParameter a sh:NodeShape ;
+    rdfs:label "EventParameter" ;
     rdfs:subClassOf bacnet:Choice ;
     sh:xone ( [ sh:property [ a sh:PropertyShape ;
                         sh:class bacnet:EventParameter.ChangeOfBitstring ;
@@ -21,15 +23,16 @@ bacnet:EventParameter a sh:NodeShape ;
                         sh:path bacnet:change-of-bitstring ] ] ) .
 
 bacnet:EventParameter.ChangeOfBitstring a sh:NodeShape ;
+    rdfs:label "EventParameter.ChangeOfBitstring" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:list-of-bitstring-values ],
+            sh:path bacnet:bitmask ],
         [ a sh:PropertyShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:bitmask ],
+            sh:path bacnet:list-of-bitstring-values ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
@@ -37,14 +40,14 @@ bacnet:EventParameter.ChangeOfBitstring a sh:NodeShape ;
             sh:path bacnet:time-delay ] ;
     sh:xone ( [ sh:property [ sh:class bacnet:NamedBits ;
                         sh:minCount 1 ;
-                        sh:path ( bacnet:list-of-bitstring-values [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ] ] [ sh:property [ sh:hasValue () ;
-                        sh:minCount 1 ;
-                        sh:path bacnet:list-of-bitstring-values ] ] [ sh:property [ sh:maxCount 0 ;
-                        sh:path bacnet:list-of-bitstring-values ] ] ),
-        ( [ sh:property [ sh:class bacnet:NamedBits ;
-                        sh:minCount 1 ;
                         sh:path ( bacnet:bitmask [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ] ] [ sh:property [ sh:hasValue () ;
                         sh:minCount 1 ;
                         sh:path bacnet:bitmask ] ] [ sh:property [ sh:maxCount 0 ;
-                        sh:path bacnet:bitmask ] ] ) .
+                        sh:path bacnet:bitmask ] ] ),
+        ( [ sh:property [ sh:class bacnet:NamedBits ;
+                        sh:minCount 1 ;
+                        sh:path ( bacnet:list-of-bitstring-values [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ] ] [ sh:property [ sh:hasValue () ;
+                        sh:minCount 1 ;
+                        sh:path bacnet:list-of-bitstring-values ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path bacnet:list-of-bitstring-values ] ] ) .
 

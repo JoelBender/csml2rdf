@@ -5,6 +5,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bacnet:TestChoice a sh:NodeShape ;
+    rdfs:label "TestChoice" ;
     rdfs:subClassOf bacnet:Choice ;
     sh:xone ( [ sh:property [ a sh:PropertyShape ;
                         sh:datatype xsd:integer ;
@@ -17,6 +18,7 @@ bacnet:TestChoice a sh:NodeShape ;
                         sh:path bacnet:some-sequence ] ] ) .
 
 bacnet:TestSequence1 a sh:NodeShape ;
+    rdfs:label "TestSequence1" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:hasValue bacnet:Null ;

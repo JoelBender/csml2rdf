@@ -6,6 +6,7 @@
 
 bacnet:AnalogInputObject a rdfs:Class,
         sh:NodeShape ;
+    rdfs:label "AnalogInputObject" ;
     rdfs:subClassOf bacnet:Object ;
     sh:property [ a sh:PropertyShape ;
             sh:maxCount 1 ;
@@ -19,15 +20,16 @@ bacnet:AnalogInputObject a rdfs:Class,
                         sh:path bacnet:tags ] ] ) .
 
 bacnet:NameValue a sh:NodeShape ;
+    rdfs:label "NameValue" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            bacnet:comment "value is limited to primitve datatypes and BACnetDateTime"@en ;
-            sh:maxCount 1 ;
-            sh:minCount 0 ;
-            sh:path bacnet:value ],
-        [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:name ] .
+            sh:path bacnet:name ],
+        [ a sh:PropertyShape ;
+            bacnet:comment "value is limited to primitve datatypes and BACnetDateTime"@en ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path bacnet:value ] .
 

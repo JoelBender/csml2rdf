@@ -6,6 +6,7 @@
 
 bacnet:AnalogInputObject a rdfs:Class,
         sh:NodeShape ;
+    rdfs:label "AnalogInputObject" ;
     rdfs:subClassOf bacnet:Object ;
     sh:property [ a sh:PropertyShape ;
             sh:maxCount 1 ;

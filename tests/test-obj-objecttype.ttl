@@ -5,6 +5,7 @@
 
 bacnet:AnalogInputObject a rdfs:Class,
         sh:NodeShape ;
+    rdfs:label "AnalogInputObject" ;
     rdfs:subClassOf bacnet:Object ;
     sh:property [ a sh:PropertyShape ;
             sh:hasValue bacnet:ObjectType.analog-input ;
@@ -13,10 +14,12 @@ bacnet:AnalogInputObject a rdfs:Class,
             sh:path bacnet:object-type ] .
 
 bacnet:ObjectType a rdfs:Class ;
+    rdfs:label "ObjectType" ;
     bacnet:memberClass bacnet:ObjectTypeEnumerationValue ;
     rdfs:subClassOf bacnet:EnumerationKind .
 
 bacnet:ObjectTypeEnumerationValue a rdfs:Class ;
+    rdfs:label "ObjectTypeEnumerationValue" ;
     rdfs:subClassOf bacnet:EnumerationValue .
 
 bacnet:ObjectType.analog-input a bacnet:ObjectTypeEnumerationValue ;

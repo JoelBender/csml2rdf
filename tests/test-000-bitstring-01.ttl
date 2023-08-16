@@ -6,10 +6,12 @@
 
 bacnet:DaysOfWeek a rdfs:Class,
         sh:NodeShape ;
+    rdfs:label "DaysOfWeek" ;
     bacnet:memberClass bacnet:DaysOfWeekNamedBits ;
     rdfs:subClassOf bacnet:Bitstring .
 
 bacnet:DaysOfWeekNamedBits a rdfs:Class ;
+    rdfs:label "DaysOfWeekNamedBits" ;
     rdfs:subClassOf bacnet:NamedBits .
 
 bacnet:DaysOfWeek.monday a bacnet:DaysOfWeekNamedBits ;
@@ -21,6 +23,7 @@ bacnet:DaysOfWeek.tuesday a bacnet:DaysOfWeekNamedBits ;
     bacnet:name "tuesday" .
 
 bacnet:TestSequence1 a sh:NodeShape ;
+    rdfs:label "TestSequence1" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:maxCount 1 ;

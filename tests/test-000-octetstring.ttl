@@ -4,6 +4,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bacnet:TestSequence a sh:NodeShape ;
+    rdfs:label "TestSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:datatype xsd:hexBinary ;

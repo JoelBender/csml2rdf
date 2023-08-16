@@ -5,6 +5,7 @@
 
 bacnet:Property a rdfs:Class,
         sh:NodeShape ;
+    rdfs:label "Property" ;
     rdfs:subClassOf bacnet:Object ;
     sh:property [ a sh:PropertyShape ;
             sh:class bacnet:DeviceObjectPropertyReference ;
@@ -13,19 +14,20 @@ bacnet:Property a rdfs:Class,
             sh:path bacnet:hasExternalReference ] .
 
 bacnet:DeviceObjectPropertyReference a sh:NodeShape ;
+    rdfs:label "DeviceObjectPropertyReference" ;
     bacnet:x-error "property-identifier missing property shape: PropertyIdentifier" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
+            sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path bacnet:property-array-index ],
+        [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:object-identifier ;
             sh:pattern "^[A-Za-z0-9-]+,[1-9][0-9]*$" ],
-        [ a sh:PropertyShape ;
-            sh:datatype xsd:nonNegativeInteger ;
-            sh:maxCount 1 ;
-            sh:minCount 0 ;
-            sh:path bacnet:property-array-index ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;

@@ -4,10 +4,12 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bacnet:Action a rdfs:Class ;
+    rdfs:label "Action" ;
     bacnet:memberClass bacnet:ActionEnumerationValue ;
     rdfs:subClassOf bacnet:EnumerationKind .
 
 bacnet:ActionEnumerationValue a rdfs:Class ;
+    rdfs:label "ActionEnumerationValue" ;
     rdfs:subClassOf bacnet:EnumerationValue .
 
 bacnet:Action.direct a bacnet:ActionEnumerationValue ;
@@ -19,20 +21,21 @@ bacnet:Action.reverse a bacnet:ActionEnumerationValue ;
     bacnet:value "1"^^xsd:nonNegativeInteger .
 
 bacnet:TestSequence a sh:NodeShape ;
+    rdfs:label "TestSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:class bacnet:ActionEnumerationValue ;
+            sh:datatype xsd:integer ;
             sh:maxCount 1 ;
-            sh:minCount 0 ;
-            sh:path bacnet:action ],
+            sh:minCount 1 ;
+            sh:path bacnet:snork ],
         [ a sh:PropertyShape ;
             sh:class bacnet:EnumerationValue ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:acknowledgment-filter ],
         [ a sh:PropertyShape ;
-            sh:datatype xsd:integer ;
+            sh:class bacnet:ActionEnumerationValue ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:snork ] .
+            sh:minCount 0 ;
+            sh:path bacnet:action ] .
 

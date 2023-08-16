@@ -5,6 +5,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bacnet:TestSequence2 a sh:NodeShape ;
+    rdfs:label "TestSequence2" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:maxCount 1 ;
@@ -18,6 +19,7 @@ bacnet:TestSequence2 a sh:NodeShape ;
                         sh:path bacnet:value ] ] ) .
 
 bacnet:TestSequence1 a sh:NodeShape ;
+    rdfs:label "TestSequence1" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:hasValue bacnet:Null ;

@@ -4,10 +4,12 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bacnet:SmallOctetString a sh:NodeShape ;
+    rdfs:label "SmallOctetString" ;
     bacnet:minimumLength 1 ;
     rdfs:subClassOf bacnet:OctetString .
 
 bacnet:TestSequence a sh:NodeShape ;
+    rdfs:label "TestSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:datatype xsd:hexBinary ;

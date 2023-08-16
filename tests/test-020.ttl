@@ -7,6 +7,7 @@ bacnet:TestSequence2 a bacnet:SequenceOf ;
     bacnet:memberType bacnet:TestSequence1 .
 
 bacnet:TestSequence1 a sh:NodeShape ;
+    rdfs:label "TestSequence1" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:hasValue bacnet:Null ;

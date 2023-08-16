@@ -5,6 +5,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bacnet:AtomicWriteFileACK a sh:NodeShape ;
+    rdfs:label "AtomicWriteFileACK" ;
     rdfs:subClassOf bacnet:Choice ;
     sh:xone ( [ sh:property [ a sh:PropertyShape ;
                         sh:datatype xsd:integer ;

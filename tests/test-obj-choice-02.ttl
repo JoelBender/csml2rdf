@@ -6,6 +6,7 @@
 
 bacnet:ChannelObject a rdfs:Class,
         sh:NodeShape ;
+    rdfs:label "ChannelObject" ;
     rdfs:subClassOf bacnet:Object ;
     sh:property [ a sh:PropertyShape ;
             sh:class bacnet:ChannelValue ;
@@ -14,10 +15,12 @@ bacnet:ChannelObject a rdfs:Class,
             sh:path bacnet:present-value ] .
 
 bacnet:LightingOperation a rdfs:Class ;
+    rdfs:label "LightingOperation" ;
     bacnet:memberClass bacnet:LightingOperationEnumerationValue ;
     rdfs:subClassOf bacnet:EnumerationKind .
 
 bacnet:LightingOperationEnumerationValue a rdfs:Class ;
+    rdfs:label "LightingOperationEnumerationValue" ;
     rdfs:subClassOf bacnet:EnumerationValue .
 
 bacnet:LightingOperation.fade-to a bacnet:LightingOperationEnumerationValue ;
@@ -65,6 +68,7 @@ bacnet:LightingOperation.warn-relinquish a bacnet:LightingOperationEnumerationVa
     bacnet:value "9"^^xsd:nonNegativeInteger .
 
 bacnet:ChannelValue a sh:NodeShape ;
+    rdfs:label "ChannelValue" ;
     rdfs:subClassOf bacnet:Choice ;
     sh:xone ( [ sh:property [ a sh:PropertyShape ;
                         sh:hasValue bacnet:Null ;
@@ -134,12 +138,18 @@ bacnet:ChannelValue a sh:NodeShape ;
                         sh:path bacnet:lighting-command ] ] ) .
 
 bacnet:LightingCommand a sh:NodeShape ;
+    rdfs:label "LightingCommand" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
             sh:minCount 0 ;
-            sh:path bacnet:fade-time ],
+            sh:path bacnet:priority ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:float ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path bacnet:target-level ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:float ;
             sh:maxCount 1 ;
@@ -154,15 +164,10 @@ bacnet:LightingCommand a sh:NodeShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
             sh:minCount 0 ;
-            sh:path bacnet:priority ],
+            sh:path bacnet:fade-time ],
         [ a sh:PropertyShape ;
             sh:class bacnet:LightingOperationEnumerationValue ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:operation ],
-        [ a sh:PropertyShape ;
-            sh:datatype xsd:float ;
-            sh:maxCount 1 ;
-            sh:minCount 0 ;
-            sh:path bacnet:target-level ] .
+            sh:path bacnet:operation ] .
 

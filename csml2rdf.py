@@ -2,6 +2,7 @@
 CSML to RDF
 """
 import sys
+import re
 from functools import partial
 
 from typing import Any, Dict, Callable, List, Tuple, TypeVar
@@ -30,6 +31,9 @@ postponed_value_shapes: List[Tuple[str, Any]] = []
 
 BACNET = Namespace("http://data.ashrae.org/bacnet/2020#")
 SH = Namespace("http://www.w3.org/ns/shacl#")
+
+# patterns
+name_to_label_re = re.compile("([a-z])([A-Z])")
 
 
 def define_fn(elem_name: str) -> Callable[[DefineFn], DefineFn]:
@@ -70,6 +74,14 @@ def normalize(name: str) -> str:
         name = name[6:]
     name = name.replace("-", "")
     return name
+
+
+def name_to_label(name: str) -> str:
+    """
+    Make a label.
+    """
+    # return Literal(name_to_label_re.sub(r"\1 \2", name))
+    return Literal(name)
 
 
 def common_metadata(property_elem, sh_property):
@@ -446,6 +458,7 @@ def define_octetstring(elem, octetstring_name: str) -> URIRef:
 
     octetstring_uri = BACNET[octetstring_name]
     graph.add((octetstring_uri, RDF.type, SH.NodeShape))
+    graph.add((octetstring_uri, RDFS.label, name_to_label(octetstring_name)))
     graph.add((octetstring_uri, RDFS.subClassOf, BACNET.OctetString))
     common_metadata(elem, octetstring_uri)
 
@@ -536,11 +549,13 @@ def define_bit_string(elem, bitstring_name: str) -> URIRef:
     bitstring_uri = BACNET[bitstring_name]
     graph.add((bitstring_uri, RDF.type, RDFS.Class))
     graph.add((bitstring_uri, RDF.type, SH.NodeShape))
+    graph.add((bitstring_uri, RDFS.label, name_to_label(bitstring_name)))
     graph.add((bitstring_uri, RDFS.subClassOf, BACNET.Bitstring))
     common_metadata(elem, bitstring_uri)
 
     namedbits_uri = BACNET[bitstring_name + "NamedBits"]
     graph.add((namedbits_uri, RDF.type, RDFS.Class))
+    graph.add((namedbits_uri, RDFS.label, name_to_label(bitstring_name + "NamedBits")))
     graph.add((namedbits_uri, RDFS.subClassOf, BACNET.NamedBits))
     graph.add((bitstring_uri, BACNET.memberClass, namedbits_uri))
 
@@ -621,11 +636,13 @@ def define_enumerated(elem, enum_name: str) -> URIRef:
 
     enum_uri = BACNET[enum_name]
     graph.add((enum_uri, RDF.type, RDFS.Class))
+    graph.add((enum_uri, RDFS.label, name_to_label(enum_name)))
     graph.add((enum_uri, RDFS.subClassOf, BACNET.EnumerationKind))
     common_metadata(elem, enum_uri)
 
     value_uri = BACNET[enum_name + "EnumerationValue"]
     graph.add((value_uri, RDF.type, RDFS.Class))
+    graph.add((value_uri, RDFS.label, name_to_label(enum_name + "EnumerationValue")))
     graph.add((value_uri, RDFS.subClassOf, BACNET.EnumerationValue))
     graph.add((enum_uri, BACNET.memberClass, value_uri))
 
@@ -834,6 +851,7 @@ def define_sequence(elem, sequence_name: str) -> URIRef:
 
     sequence_uri = BACNET[sequence_name]
     graph.add((sequence_uri, RDF.type, SH.NodeShape))
+    graph.add((sequence_uri, RDFS.label, name_to_label(sequence_name)))
     graph.add((sequence_uri, RDFS.subClassOf, BACNET.Sequence))
     common_metadata(elem, sequence_uri)
 
@@ -950,6 +968,7 @@ def define_choice(elem, choice_name: str) -> URIRef:
 
     choice_uri = BACNET[choice_name]
     graph.add((choice_uri, RDF.type, SH.NodeShape))
+    graph.add((choice_uri, RDFS.label, name_to_label(choice_name)))
     graph.add((choice_uri, RDFS.subClassOf, BACNET.Choice))
     common_metadata(elem, choice_uri)
 
@@ -1181,6 +1200,7 @@ def define_object(elem, object_name: str) -> URIRef:
     object_uri = BACNET[object_name]
     graph.add((object_uri, RDF.type, SH.NodeShape))
     graph.add((object_uri, RDF.type, RDFS.Class))
+    graph.add((object_uri, RDFS.label, name_to_label(object_name)))
     graph.add((object_uri, RDFS.subClassOf, BACNET.Object))
     common_metadata(elem, object_uri)
 

@@ -6,6 +6,7 @@
 
 bacnet:AnalogValueObject a rdfs:Class,
         sh:NodeShape ;
+    rdfs:label "AnalogValueObject" ;
     rdfs:subClassOf bacnet:Object ;
     sh:property [ a sh:PropertyShape ;
             sh:maxCount 1 ;
@@ -19,6 +20,7 @@ bacnet:AnalogValueObject a rdfs:Class,
                         sh:path bacnet:tags ] ] ) .
 
 bacnet:NameValue a sh:NodeShape ;
+    rdfs:label "NameValue" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:datatype xsd:string ;

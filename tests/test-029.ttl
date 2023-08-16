@@ -5,19 +5,21 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 bacnet:SomeSequence a sh:NodeShape ;
+    rdfs:label "SomeSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:datatype xsd:nonNegativeInteger ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:some-unsigned ],
-        [ a sh:PropertyShape ;
             sh:class bacnet:SomeSequence.SomeRange ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:some-range ] .
+            sh:path bacnet:some-range ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:some-unsigned ] .
 
 bacnet:SomeSequence.SomeRange a sh:NodeShape ;
+    rdfs:label "SomeSequence.SomeRange" ;
     rdfs:subClassOf bacnet:Choice ;
     sh:xone ( [ sh:property [ a sh:PropertyShape ;
                         sh:class bacnet:SomeSequence.SomeRange.ByPosition ;
@@ -34,6 +36,7 @@ bacnet:SomeSequence.SomeRange a sh:NodeShape ;
                         sh:path bacnet:by-time ] ] ) .
 
 bacnet:SomeSequence.SomeRange.ByPosition a sh:NodeShape ;
+    rdfs:label "SomeSequence.SomeRange.ByPosition" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:datatype xsd:integer ;
@@ -47,6 +50,7 @@ bacnet:SomeSequence.SomeRange.ByPosition a sh:NodeShape ;
             sh:path bacnet:reference-index ] .
 
 bacnet:SomeSequence.SomeRange.BySequenceNumber a sh:NodeShape ;
+    rdfs:label "SomeSequence.SomeRange.BySequenceNumber" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:datatype xsd:integer ;
@@ -60,16 +64,17 @@ bacnet:SomeSequence.SomeRange.BySequenceNumber a sh:NodeShape ;
             sh:path bacnet:reference-sequence-number ] .
 
 bacnet:SomeSequence.SomeRange.ByTime a sh:NodeShape ;
+    rdfs:label "SomeSequence.SomeRange.ByTime" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
+            sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:count ],
+        [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:reference-time ;
-            sh:pattern "^([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]))? ([0-9]{2}):([0-9]{2}):([0-9]{2})[.]([0-9]{2})$" ],
-        [ a sh:PropertyShape ;
-            sh:datatype xsd:integer ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:count ] .
+            sh:pattern "^([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]))? ([0-9]{2}):([0-9]{2}):([0-9]{2})[.]([0-9]{2})$" ] .
 
