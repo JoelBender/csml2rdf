@@ -1398,6 +1398,18 @@ for reference_type, sh_property in postponed_value_shapes:
         continue
     value_shape_fns[reference_type](sh_property)
 
+# find the property identifiers and add a reference to the predicate used
+# for statements relating objects and property values
+query = """
+    PREFIX bacnet: <http://data.ashrae.org/bacnet/2020#>
+
+    SELECT ?node ?name WHERE {
+        ?node a bacnet:PropertyIdentifierEnumerationValue .
+        optional { ?node bacnet:name ?name } .
+        }
+    """
+for property_node, property_name in graph.query(query):
+    graph.add((property_node, BACNET["predicate"], BACNET[property_name]))
 
 # dump the result
 sys.stdout.write(graph.serialize(format="turtle"))
