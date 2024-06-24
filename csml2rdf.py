@@ -68,10 +68,6 @@ def normalize(name: str) -> str:
     """
     if name.startswith("0-"):
         name = name[2:]
-    # if name.startswith("BACnet-"):
-    #     name = name[7:]
-    if name.startswith("BACnet"):
-        name = name[6:]
     name = name.replace("-", "")
     return name
 
