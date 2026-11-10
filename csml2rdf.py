@@ -33,7 +33,7 @@ postponed_value_shapes: List[Tuple[str, Any]] = []
 # options
 retain_prefix = False
 
-BACNET = Namespace("http://data.ashrae.org/bacnet/2020#")
+BACNET = Namespace("http://data.ashrae.org/bacnet/2024#")
 SH = Namespace("http://www.w3.org/ns/shacl#")
 
 # patterns
@@ -1436,7 +1436,7 @@ for reference_type, sh_property in postponed_value_shapes:
 # for statements relating objects and property values
 property_identifier_class = normalize("BACnetPropertyIdentifier") + "EnumerationValue"
 query = f"""
-    PREFIX bacnet: <http://data.ashrae.org/bacnet/2020#>
+    PREFIX bacnet: <http://data.ashrae.org/bacnet/2024#>
 
     SELECT ?node ?name WHERE {{
         ?node a bacnet:{property_identifier_class} .
