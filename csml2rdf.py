@@ -3,6 +3,7 @@ CSML to RDF
 """
 import sys
 import re
+import argparse
 from functools import partial
 
 from typing import Any, Dict, Callable, List, Tuple, TypeVar
@@ -28,6 +29,9 @@ property_shape_fns: Dict[str, Callable[[Any], None]] = {}
 postponed_property_shapes: List[Tuple[str, Any, Any]] = []
 value_shape_fns: Dict[str, Callable[[Any], None]] = {}
 postponed_value_shapes: List[Tuple[str, Any]] = []
+
+# options
+retain_prefix = False
 
 BACNET = Namespace("http://data.ashrae.org/bacnet/2020#")
 SH = Namespace("http://www.w3.org/ns/shacl#")
@@ -68,6 +72,8 @@ def normalize(name: str) -> str:
     """
     if name.startswith("0-"):
         name = name[2:]
+    if not retain_prefix and name.startswith("BACnet"):
+        name = name[6:]
     name = name.replace("-", "")
     return name
 
@@ -1345,14 +1351,34 @@ def weeknday_property_shape(sequence_uri, property_elem) -> BNode:
 #   __main__
 #
 
-# parse the XML Schema document and get the root element
-doc = etree.parse(sys.stdin)
-root = doc.getroot()
+parser = argparse.ArgumentParser(
+    description="Convert CSML to SHACL shapes in Turtle (written to stdout)",
+)
+parser.add_argument(
+    "files",
+    nargs="*",
+    metavar="FILE",
+    help="CSML documents whose definitions are combined (default: read stdin)",
+)
+parser.add_argument(
+    "--retain",
+    action="store_true",
+    help="retain the 'BACnet' name prefix (removed by default)",
+)
+args = parser.parse_args()
+retain_prefix = args.retain
 
-# simplify the element names by pulling out the local name
-for elem in root.getiterator(tag=etree.Element):
-    elem.tag = etree.QName(elem).localname
-etree.cleanup_namespaces(root)
+# parse the CSML documents and get the root elements
+roots = []
+for source in args.files or [sys.stdin]:
+    root = etree.parse(source).getroot()
+
+    # simplify the element names by pulling out the local name
+    for elem in root.getiterator(tag=etree.Element):
+        elem.tag = etree.QName(elem).localname
+    etree.cleanup_namespaces(root)
+
+    roots.append(root)
 
 # start with an empty graph
 graph = Graph()
@@ -1361,13 +1387,25 @@ graph = Graph()
 graph.bind("bacnet", BACNET)
 graph.bind("sh", SH)
 
-for x in root.xpath("/CSML/Definitions"):
-    for y in x:
-        if not isinstance(y.tag, str):
-            continue
-        if y.tag not in define_fns:
-            raise RuntimeError(f"missing fn: {y}")
-        define_fns[y.tag](y, "")
+# the source of each definition, so that a definition repeated in another
+# document can be reported
+definition_sources: Dict[str, str] = {}
+
+for source, root in zip(args.files or ["<stdin>"], roots):
+    for x in root.xpath("/CSML/Definitions"):
+        for y in x:
+            if not isinstance(y.tag, str):
+                continue
+            if y.tag not in define_fns:
+                raise RuntimeError(f"missing fn: {y}")
+            definition_name = y.attrib["name"]
+            if definition_name in definition_sources:
+                sys.stderr.write(
+                    f"warning: {definition_name} in {source} is already defined"
+                    f" in {definition_sources[definition_name]}\n"
+                )
+            definition_sources[definition_name] = source
+            define_fns[y.tag](y, "")
 
 for child_type, sequence_uri, child_elem in postponed_property_shapes:
     if child_type not in property_shape_fns:
@@ -1386,7 +1424,7 @@ for reference_type, sh_property in postponed_value_shapes:
     if reference_type not in value_shape_fns:
         graph.add(
             (
-                sequence_uri,
+                sh_property,
                 BACNET["x-error"],
                 Literal(f"missing type definition: {reference_type}"),
             )
@@ -1396,13 +1434,14 @@ for reference_type, sh_property in postponed_value_shapes:
 
 # find the property identifiers and add a reference to the predicate used
 # for statements relating objects and property values
-query = """
+property_identifier_class = normalize("BACnetPropertyIdentifier") + "EnumerationValue"
+query = f"""
     PREFIX bacnet: <http://data.ashrae.org/bacnet/2020#>
 
-    SELECT ?node ?name WHERE {
-        ?node a bacnet:PropertyIdentifierEnumerationValue .
-        optional { ?node bacnet:name ?name } .
-        }
+    SELECT ?node ?name WHERE {{
+        ?node a bacnet:{property_identifier_class} .
+        optional {{ ?node bacnet:name ?name }} .
+        }}
     """
 for property_node, property_name in graph.query(query):
     graph.add((property_node, BACNET["predicate"], BACNET[property_name]))

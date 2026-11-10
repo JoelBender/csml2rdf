@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CSML xmlns="http://bacnet.org/csml/1.2" defaultLocale="en-US">
+
+    <!--
+    Copyright 2017 ASHRAE
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+    -->
+
+    <!--
+    Provided for backward compatibility.
+
+    Virtual terminal definitions extracted from bacnet.xml (BACnet Protocol_Revision 19,
+    Clause 21 of ANSI/ASHRAE 135-2016). They are referenced by the Device object
+    (vt-classes-supported, active-vt-sessions) in bacnet-object-types.xml but are not
+    defined in bacnet-data-types.xml.
+    -->
+
+    <Definitions>
+
+        <Enumerated name="0-BACnetVTClass" minimum="64" maximum="65535" comment="Enumerated values 0-63 are reserved for prototype by ASHRAE. Enumerated values 64-65535 may be used by others subject to the procedures and constraints described  in Clause 23.">
+            <NamedValues>
+                <Unsigned name="default-terminal" value="0"/>
+                <Unsigned name="ansi-x3-64" value="1"/>
+                <Unsigned name="dec-vt52" value="2"/>
+                <Unsigned name="dec-vt100" value="3"/>
+                <Unsigned name="dec-vt220" value="4"/>
+                <Unsigned name="hp-700-94" value="5"/>
+                <Unsigned name="ibm-3130" value="6"/>
+            </NamedValues>
+        </Enumerated>
+
+        <Sequence name="0-BACnetVTSession">
+            <Unsigned name="local-vt-session-id" type="0-Unsigned8"/>
+            <Unsigned name="remote-vt-session-id" type="0-Unsigned8"/>
+            <Sequence name="remote-vt-address" type="0-BACnetAddress"/>
+        </Sequence>
+
+    </Definitions>
+</CSML>

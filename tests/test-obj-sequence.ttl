@@ -24,6 +24,7 @@ bacnet:PropertyIdentifierEnumerationValue a rdfs:Class ;
 
 bacnet:PropertyIdentifier.absentee-limit a bacnet:PropertyIdentifierEnumerationValue ;
     bacnet:name "absentee-limit" ;
+    bacnet:predicate bacnet:absentee-limit ;
     bacnet:value "244"^^xsd:nonNegativeInteger .
 
 bacnet:ObjectPropertyReference a sh:NodeShape ;
@@ -36,13 +37,13 @@ bacnet:ObjectPropertyReference a sh:NodeShape ;
             sh:path bacnet:object-identifier ;
             sh:pattern "^[A-Za-z0-9-]+,[1-9][0-9]*$" ],
         [ a sh:PropertyShape ;
-            sh:datatype xsd:nonNegativeInteger ;
-            sh:maxCount 1 ;
-            sh:minCount 0 ;
-            sh:path bacnet:property-array-index ],
-        [ a sh:PropertyShape ;
             sh:class bacnet:PropertyIdentifierEnumerationValue ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:property-identifier ] .
+            sh:path bacnet:property-identifier ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path bacnet:property-array-index ] .
 

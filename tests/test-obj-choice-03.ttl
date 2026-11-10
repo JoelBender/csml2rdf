@@ -46,14 +46,14 @@ bacnet:DeviceObjectReference a sh:NodeShape ;
     sh:property [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:object-identifier ;
+            sh:minCount 0 ;
+            sh:path bacnet:device-identifier ;
             sh:pattern "^[A-Za-z0-9-]+,[1-9][0-9]*$" ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
-            sh:minCount 0 ;
-            sh:path bacnet:device-identifier ;
+            sh:minCount 1 ;
+            sh:path bacnet:object-identifier ;
             sh:pattern "^[A-Za-z0-9-]+,[1-9][0-9]*$" ] .
 
 bacnet:EventParameter a sh:NodeShape ;
@@ -79,8 +79,7 @@ bacnet:EventParameter a sh:NodeShape ;
 
 bacnet:EventParameter.BufferReady a sh:NodeShape ;
     rdfs:label "EventParameter.BufferReady" ;
-    bacnet:x-error "missing type definition: TimerState",
-        "previous-notification-count missing property shape: Unsigned32" ;
+    bacnet:x-error "previous-notification-count missing property shape: Unsigned32" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
@@ -94,11 +93,11 @@ bacnet:EventParameter.ChangeOfBitstring a sh:NodeShape ;
     sh:property [ a sh:PropertyShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:list-of-bitstring-values ],
+            sh:path bacnet:bitmask ],
         [ a sh:PropertyShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:bitmask ],
+            sh:path bacnet:list-of-bitstring-values ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
@@ -121,20 +120,21 @@ bacnet:EventParameter.ChangeOfTimer a sh:NodeShape ;
     rdfs:label "EventParameter.ChangeOfTimer" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:alarm-value ],
+        [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:time-delay ],
         [ a sh:PropertyShape ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:alarm-value ],
-        [ a sh:PropertyShape ;
             sh:class bacnet:DeviceObjectReference ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:update-time-reference ] ;
-    sh:xone ( [ sh:property [ sh:minCount 1 ;
+    sh:xone ( [ sh:property [ bacnet:x-error "missing type definition: TimerState" ;
+                        sh:minCount 1 ;
                         sh:path ( bacnet:alarm-value [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ] ] [ sh:property [ sh:hasValue () ;
                         sh:minCount 1 ;
                         sh:path bacnet:alarm-value ] ] [ sh:property [ sh:maxCount 0 ;
@@ -144,16 +144,16 @@ bacnet:EventParameter.Extended a sh:NodeShape ;
     rdfs:label "EventParameter.Extended" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:parameters ],
+        [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
             sh:maxInclusive 65535 ;
             sh:minCount 1 ;
             sh:minInclusive 0 ;
             sh:path bacnet:vendor-id ],
-        [ a sh:PropertyShape ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:parameters ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;

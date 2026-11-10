@@ -1,0 +1,17 @@
+[project]
+name = "csml2rdf"
+version = "0.1.0"
+description = "Convert BACnet base types and objects in CSML to SHACL rules for validating BACnet content encoded in RDF"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "lxml",
+    "rdflib",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "pyshacl",
+]

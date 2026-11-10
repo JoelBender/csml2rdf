@@ -1,0 +1,3 @@
+# canonical CSML sources, download from https://data.ashrae.org/bacnet/XD/latest/
+bacnet-data-types.xml
+bacnet-object-types.xml
