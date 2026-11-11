@@ -1,4 +1,4 @@
-@prefix bacnet: <http://data.ashrae.org/bacnet/2020#> .
+@prefix bacnet: <http://data.ashrae.org/bacnet/2024#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -35,15 +35,15 @@ bacnet:ObjectPropertyReference a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:object-identifier ;
-            sh:pattern "^[A-Za-z0-9-]+,[1-9][0-9]*$" ],
-        [ a sh:PropertyShape ;
-            sh:class bacnet:PropertyIdentifierEnumerationValue ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:property-identifier ],
+            sh:pattern "^[A-Za-z0-9-]+,(0|[1-9][0-9]*)$" ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
             sh:minCount 0 ;
-            sh:path bacnet:property-array-index ] .
+            sh:path bacnet:property-array-index ],
+        [ a sh:PropertyShape ;
+            sh:class bacnet:PropertyIdentifierEnumerationValue ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:property-identifier ] .
 

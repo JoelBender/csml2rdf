@@ -1,4 +1,4 @@
-@prefix bacnet: <http://data.ashrae.org/bacnet/2020#> .
+@prefix bacnet: <http://data.ashrae.org/bacnet/2024#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -41,5 +41,5 @@ bacnet:TestSequence1.ListOfCovNotificationsSequence a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:some-object-identifier ;
-            sh:pattern "^[A-Za-z0-9-]+,[1-9][0-9]*$" ] .
+            sh:pattern "^[A-Za-z0-9-]+,(0|[1-9][0-9]*)$" ] .
 

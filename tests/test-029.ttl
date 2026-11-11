@@ -1,4 +1,4 @@
-@prefix bacnet: <http://data.ashrae.org/bacnet/2020#> .
+@prefix bacnet: <http://data.ashrae.org/bacnet/2024#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -8,15 +8,15 @@ bacnet:SomeSequence a sh:NodeShape ;
     rdfs:label "SomeSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:class bacnet:SomeSequence.SomeRange ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:some-range ],
-        [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:some-unsigned ] .
+            sh:path bacnet:some-unsigned ],
+        [ a sh:PropertyShape ;
+            sh:class bacnet:SomeSequence.SomeRange ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:some-range ] .
 
 bacnet:SomeSequence.SomeRange a sh:NodeShape ;
     rdfs:label "SomeSequence.SomeRange" ;
@@ -39,29 +39,29 @@ bacnet:SomeSequence.SomeRange.ByPosition a sh:NodeShape ;
     rdfs:label "SomeSequence.SomeRange.ByPosition" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:datatype xsd:integer ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:count ],
-        [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:reference-index ] .
+            sh:path bacnet:reference-index ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:count ] .
 
 bacnet:SomeSequence.SomeRange.BySequenceNumber a sh:NodeShape ;
     rdfs:label "SomeSequence.SomeRange.BySequenceNumber" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:datatype xsd:integer ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:count ],
-        [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:reference-sequence-number ] .
+            sh:path bacnet:reference-sequence-number ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:count ] .
 
 bacnet:SomeSequence.SomeRange.ByTime a sh:NodeShape ;
     rdfs:label "SomeSequence.SomeRange.ByTime" ;

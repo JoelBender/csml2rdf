@@ -1275,7 +1275,7 @@ def any_property_shape(sequence_uri, property_elem) -> BNode:
 @value_shape_fn("ObjectIdentifier")
 def objectidentifier_value_fn(sh_property):
     graph.add((sh_property, SH.datatype, XSD.string))
-    graph.add((sh_property, SH.pattern, Literal("^[A-Za-z0-9-]+,[1-9][0-9]*$")))
+    graph.add((sh_property, SH.pattern, Literal("^[A-Za-z0-9-]+,(0|[1-9][0-9]*)$")))
 
 
 @property_shape_fn("ObjectIdentifier")
@@ -1310,7 +1310,7 @@ def define_objectidentifier(elem, objectidentifier_name: str) -> URIRef:
 def objectidentifierpattern_value_fn(sh_property):
     graph.add((sh_property, SH.datatype, XSD.string))
     graph.add(
-        (sh_property, SH.pattern, Literal("^([A-Za-z0-9-]+|[*]),([1-9][0-9]*|[*])$"))
+        (sh_property, SH.pattern, Literal("^([A-Za-z0-9-]+|[*]),(0|[1-9][0-9]*|[*])$"))
     )
 
 

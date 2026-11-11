@@ -1,4 +1,4 @@
-@prefix bacnet: <http://data.ashrae.org/bacnet/2020#> .
+@prefix bacnet: <http://data.ashrae.org/bacnet/2024#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -21,16 +21,16 @@ bacnet:LogMultipleRecord a sh:NodeShape ;
     rdfs:label "LogMultipleRecord" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:class bacnet:LogData ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:log-data ],
-        [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:timestamp ;
-            sh:pattern "^([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]))? ([0-9]{2}):([0-9]{2}):([0-9]{2})[.]([0-9]{2})$" ] .
+            sh:pattern "^([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]))? ([0-9]{2}):([0-9]{2}):([0-9]{2})[.]([0-9]{2})$" ],
+        [ a sh:PropertyShape ;
+            sh:class bacnet:LogData ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:log-data ] .
 
 bacnet:LogStatus.buffer-purged a bacnet:LogStatusNamedBits ;
     bacnet:bit "1"^^xsd:nonNegativeInteger ;
@@ -51,12 +51,12 @@ bacnet:Error a sh:NodeShape ;
             sh:class bacnet:EnumerationValue ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:error-code ],
+            sh:path bacnet:error-class ],
         [ a sh:PropertyShape ;
             sh:class bacnet:EnumerationValue ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:error-class ] .
+            sh:path bacnet:error-code ] .
 
 bacnet:LogData a sh:NodeShape ;
     rdfs:label "LogData" ;
