@@ -8,15 +8,15 @@ bacnet:SomeSequence a sh:NodeShape ;
     rdfs:label "SomeSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:datatype xsd:nonNegativeInteger ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:some-unsigned ],
-        [ a sh:PropertyShape ;
             sh:class bacnet:SomeSequence.SomeRange ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:some-range ] .
+            sh:path bacnet:some-range ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:some-unsigned ] .
 
 bacnet:SomeSequence.SomeRange a sh:NodeShape ;
     rdfs:label "SomeSequence.SomeRange" ;

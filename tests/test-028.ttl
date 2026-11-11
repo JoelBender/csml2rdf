@@ -39,15 +39,15 @@ bacnet:Range.BySequenceNumber a sh:NodeShape ;
     rdfs:label "Range.BySequenceNumber" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:datatype xsd:nonNegativeInteger ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:reference-sequence-number ],
-        [ a sh:PropertyShape ;
             sh:datatype xsd:integer ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:count ] .
+            sh:path bacnet:count ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:reference-sequence-number ] .
 
 bacnet:Range.ByTime a sh:NodeShape ;
     rdfs:label "Range.ByTime" ;

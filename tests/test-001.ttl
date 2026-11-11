@@ -29,13 +29,13 @@ bacnet:TestSequence a sh:NodeShape ;
             sh:minCount 1 ;
             sh:path bacnet:snork ],
         [ a sh:PropertyShape ;
-            sh:class bacnet:ActionEnumerationValue ;
-            sh:maxCount 1 ;
-            sh:minCount 0 ;
-            sh:path bacnet:action ],
-        [ a sh:PropertyShape ;
             sh:class bacnet:EnumerationValue ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:acknowledgment-filter ] .
+            sh:path bacnet:acknowledgment-filter ],
+        [ a sh:PropertyShape ;
+            sh:class bacnet:ActionEnumerationValue ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path bacnet:action ] .
 

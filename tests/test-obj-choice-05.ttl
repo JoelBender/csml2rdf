@@ -40,14 +40,14 @@ bacnet:EventParameter.ChangeOfBitstring a sh:NodeShape ;
             sh:path bacnet:time-delay ] ;
     sh:xone ( [ sh:property [ sh:class bacnet:NamedBits ;
                         sh:minCount 1 ;
-                        sh:path ( bacnet:bitmask [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ] ] [ sh:property [ sh:hasValue () ;
-                        sh:minCount 1 ;
-                        sh:path bacnet:bitmask ] ] [ sh:property [ sh:maxCount 0 ;
-                        sh:path bacnet:bitmask ] ] ),
-        ( [ sh:property [ sh:class bacnet:NamedBits ;
-                        sh:minCount 1 ;
                         sh:path ( bacnet:list-of-bitstring-values [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ] ] [ sh:property [ sh:hasValue () ;
                         sh:minCount 1 ;
                         sh:path bacnet:list-of-bitstring-values ] ] [ sh:property [ sh:maxCount 0 ;
-                        sh:path bacnet:list-of-bitstring-values ] ] ) .
+                        sh:path bacnet:list-of-bitstring-values ] ] ),
+        ( [ sh:property [ sh:class bacnet:NamedBits ;
+                        sh:minCount 1 ;
+                        sh:path ( bacnet:bitmask [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ] ] [ sh:property [ sh:hasValue () ;
+                        sh:minCount 1 ;
+                        sh:path bacnet:bitmask ] ] [ sh:property [ sh:maxCount 0 ;
+                        sh:path bacnet:bitmask ] ] ) .
 

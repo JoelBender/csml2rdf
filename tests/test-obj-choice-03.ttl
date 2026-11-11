@@ -22,17 +22,17 @@ bacnet:DeviceObjectPropertyReference a sh:NodeShape ;
     bacnet:x-error "property-identifier missing property shape: PropertyIdentifier" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            bacnet:comment "used only with array datatype if omitted with an array then the entire array is referenced"@en ;
-            sh:datatype xsd:nonNegativeInteger ;
-            sh:maxCount 1 ;
-            sh:minCount 0 ;
-            sh:path bacnet:property-array-index ],
-        [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
             sh:minCount 0 ;
             sh:path bacnet:device-identifier ;
             sh:pattern "^[A-Za-z0-9-]+,(0|[1-9][0-9]*)$" ],
+        [ a sh:PropertyShape ;
+            bacnet:comment "used only with array datatype if omitted with an array then the entire array is referenced"@en ;
+            sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path bacnet:property-array-index ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
@@ -46,14 +46,14 @@ bacnet:DeviceObjectReference a sh:NodeShape ;
     sh:property [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:object-identifier ;
+            sh:minCount 0 ;
+            sh:path bacnet:device-identifier ;
             sh:pattern "^[A-Za-z0-9-]+,(0|[1-9][0-9]*)$" ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
-            sh:minCount 0 ;
-            sh:path bacnet:device-identifier ;
+            sh:minCount 1 ;
+            sh:path bacnet:object-identifier ;
             sh:pattern "^[A-Za-z0-9-]+,(0|[1-9][0-9]*)$" ] .
 
 bacnet:EventParameter a sh:NodeShape ;
@@ -93,7 +93,7 @@ bacnet:EventParameter.ChangeOfBitstring a sh:NodeShape ;
     sh:property [ a sh:PropertyShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:list-of-bitstring-values ],
+            sh:path bacnet:bitmask ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
@@ -102,7 +102,7 @@ bacnet:EventParameter.ChangeOfBitstring a sh:NodeShape ;
         [ a sh:PropertyShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:bitmask ] ;
+            sh:path bacnet:list-of-bitstring-values ] ;
     sh:xone ( [ sh:property [ sh:class bacnet:NamedBits ;
                         sh:minCount 1 ;
                         sh:path ( bacnet:bitmask [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ] ] [ sh:property [ sh:hasValue () ;
@@ -146,11 +146,6 @@ bacnet:EventParameter.Extended a sh:NodeShape ;
     sh:property [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:extended-event-type ],
-        [ a sh:PropertyShape ;
-            sh:datatype xsd:nonNegativeInteger ;
-            sh:maxCount 1 ;
             sh:maxInclusive 65535 ;
             sh:minCount 1 ;
             sh:minInclusive 0 ;
@@ -158,7 +153,12 @@ bacnet:EventParameter.Extended a sh:NodeShape ;
         [ a sh:PropertyShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:parameters ] ;
+            sh:path bacnet:parameters ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:extended-event-type ] ;
     sh:xone ( [ sh:property [ sh:minCount 1 ;
                         sh:node bacnet:EventParameter.Extended.ParametersChoice ;
                         sh:path ( bacnet:parameters [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ] ] [ sh:property [ sh:hasValue () ;

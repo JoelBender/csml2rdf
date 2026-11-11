@@ -7,19 +7,19 @@ bacnet:TestSequence a sh:NodeShape ;
     rdfs:label "TestSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            bacnet:comment "this is a long line of text"@en ;
-            sh:datatype xsd:hexBinary ;
-            sh:maxCount 1 ;
-            sh:maxLength 12 ;
-            sh:minCount 0 ;
-            sh:path bacnet:another-blob ],
-        [ a sh:PropertyShape ;
             sh:datatype xsd:hexBinary ;
             sh:maxCount 1 ;
             sh:maxLength 6 ;
             sh:minCount 1 ;
             sh:minLength 6 ;
             sh:path bacnet:week-n-day ],
+        [ a sh:PropertyShape ;
+            bacnet:comment "this is a long line of text"@en ;
+            sh:datatype xsd:hexBinary ;
+            sh:maxCount 1 ;
+            sh:maxLength 12 ;
+            sh:minCount 0 ;
+            sh:path bacnet:another-blob ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:hexBinary ;
             sh:maxCount 1 ;
