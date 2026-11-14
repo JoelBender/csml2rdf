@@ -474,16 +474,20 @@ def define_octetstring(elem, octetstring_name: str) -> URIRef:
         maximumLength_attr = int(maximumLength_attr)
         graph.add((octetstring_uri, BACNET.maximumLength, Literal(maximumLength_attr)))
 
-    property_shape_fns[octetstring_name] = partial(
-        octetstring_property_shape,
-        minimumLength_attr,
-        maximumLength_attr,
-    )
-    value_shape_fns[octetstring_name] = partial(
-        octetstring_value_fn,
-        minimumLength_attr,
-        maximumLength_attr,
-    )
+    # a definition with the same name as a built-in type, like
+    # 0-BACnetWeekNDay when the prefix is removed, does not replace the
+    # shapes of the built-in type
+    if octetstring_name not in builtin_types:
+        property_shape_fns[octetstring_name] = partial(
+            octetstring_property_shape,
+            minimumLength_attr,
+            maximumLength_attr,
+        )
+        value_shape_fns[octetstring_name] = partial(
+            octetstring_value_fn,
+            minimumLength_attr,
+            maximumLength_attr,
+        )
 
 
 #
@@ -701,7 +705,7 @@ def date_property_shape(sequence_uri, property_elem) -> BNode:
 
 @value_shape_fn("DatePattern")
 def datepattern_value_fn(sh_property):
-    graph.add((sh_property, SH.datatype, XSD.string))
+    graph.add((sh_property, SH.datatype, BACNET.datePattern))
     graph.add(
         (
             sh_property,
@@ -726,16 +730,7 @@ def datepattern_property_shape(sequence_uri, property_elem) -> BNode:
 
 @value_shape_fn("DateTime")
 def datetime_value_fn(sh_property):
-    graph.add((sh_property, SH.datatype, XSD.string))
-    graph.add(
-        (
-            sh_property,
-            SH.pattern,
-            Literal(
-                "^([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]))? ([0-9]{2}):([0-9]{2}):([0-9]{2})[.]([0-9]{2})$"
-            ),
-        )
-    )
+    graph.add((sh_property, SH.datatype, XSD.dateTime))
 
 
 @property_shape_fn("DateTime")
@@ -753,7 +748,7 @@ def datetime_property_shape(sequence_uri, property_elem) -> BNode:
 
 @value_shape_fn("DateTimePattern")
 def datetimepattern_value_fn(sh_property):
-    graph.add((sh_property, SH.datatype, XSD.string))
+    graph.add((sh_property, SH.datatype, BACNET.dateTimePattern))
     graph.add(
         (
             sh_property,
@@ -805,7 +800,7 @@ def time_property_shape(sequence_uri, property_elem) -> BNode:
 
 @value_shape_fn("TimePattern")
 def timepattern_value_fn(sh_property):
-    graph.add((sh_property, SH.datatype, XSD.string))
+    graph.add((sh_property, SH.datatype, BACNET.timePattern))
     graph.add(
         (
             sh_property,
@@ -941,10 +936,16 @@ def define_sequence(elem, sequence_name: str) -> URIRef:
             # now there is a shape function for it
             property_shape_fns[child_type_name](sequence_uri, child_elem)
 
-    property_shape_fns[sequence_name] = partial(sequence_property_shape, sequence_uri)
-    value_shape_fns[sequence_name] = lambda sh_property: graph.add(
-        (sh_property, SH.node, sequence_uri)
-    )
+    # a definition with the same name as a built-in type, like
+    # 0-BACnetDateTime when the prefix is removed, does not replace the
+    # shapes of the built-in type
+    if sequence_name not in builtin_types:
+        property_shape_fns[sequence_name] = partial(
+            sequence_property_shape, sequence_uri
+        )
+        value_shape_fns[sequence_name] = lambda sh_property: graph.add(
+            (sh_property, SH.node, sequence_uri)
+        )
 
     return sequence_uri
 
@@ -1329,7 +1330,7 @@ def objectidentifierpattern_property_shape(sequence_uri, property_elem) -> BNode
 
 @value_shape_fn("WeekNDay")
 def weeknday_value_fn(sh_property):
-    graph.add((sh_property, SH.datatype, XSD.string))
+    graph.add((sh_property, SH.datatype, BACNET.weekNDay))
     graph.add(
         (
             sh_property,
@@ -1350,6 +1351,9 @@ def weeknday_property_shape(sequence_uri, property_elem) -> BNode:
 #
 #   __main__
 #
+
+# the element kinds with shapes defined above
+builtin_types = set(property_shape_fns) & set(value_shape_fns)
 
 parser = argparse.ArgumentParser(
     description="Convert CSML to SHACL shapes in Turtle (written to stdout)",

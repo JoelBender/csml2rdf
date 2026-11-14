@@ -7,7 +7,7 @@ bacnet:TestSequence a sh:NodeShape ;
     rdfs:label "TestSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:datatype xsd:string ;
+            sh:datatype bacnet:datePattern ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:date-pattern ;

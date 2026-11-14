@@ -144,30 +144,30 @@ bacnet:LightingCommand a sh:NodeShape ;
             sh:datatype xsd:float ;
             sh:maxCount 1 ;
             sh:minCount 0 ;
-            sh:path bacnet:ramp-rate ],
-        [ a sh:PropertyShape ;
-            sh:datatype xsd:float ;
-            sh:maxCount 1 ;
-            sh:minCount 0 ;
             sh:path bacnet:step-increment ],
         [ a sh:PropertyShape ;
-            sh:class bacnet:LightingOperationEnumerationValue ;
+            sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:operation ],
+            sh:minCount 0 ;
+            sh:path bacnet:priority ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:float ;
             sh:maxCount 1 ;
             sh:minCount 0 ;
             sh:path bacnet:target-level ],
         [ a sh:PropertyShape ;
+            sh:datatype xsd:float ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:path bacnet:ramp-rate ],
+        [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
             sh:minCount 0 ;
             sh:path bacnet:fade-time ],
         [ a sh:PropertyShape ;
-            sh:datatype xsd:nonNegativeInteger ;
+            sh:class bacnet:LightingOperationEnumerationValue ;
             sh:maxCount 1 ;
-            sh:minCount 0 ;
-            sh:path bacnet:priority ] .
+            sh:minCount 1 ;
+            sh:path bacnet:operation ] .
 

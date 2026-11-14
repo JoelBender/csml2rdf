@@ -26,11 +26,10 @@ bacnet:LogMultipleRecord a sh:NodeShape ;
             sh:minCount 1 ;
             sh:path bacnet:log-data ],
         [ a sh:PropertyShape ;
-            sh:datatype xsd:string ;
+            sh:datatype xsd:dateTime ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:timestamp ;
-            sh:pattern "^([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]))? ([0-9]{2}):([0-9]{2}):([0-9]{2})[.]([0-9]{2})$" ] .
+            sh:path bacnet:timestamp ] .
 
 bacnet:LogStatus.buffer-purged a bacnet:LogStatusNamedBits ;
     bacnet:bit "1"^^xsd:nonNegativeInteger ;

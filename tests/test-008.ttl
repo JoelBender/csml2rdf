@@ -7,12 +7,11 @@ bacnet:TestSequence a sh:NodeShape ;
     rdfs:label "TestSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:datatype xsd:hexBinary ;
+            sh:datatype bacnet:weekNDay ;
             sh:maxCount 1 ;
-            sh:maxLength 6 ;
             sh:minCount 1 ;
-            sh:minLength 6 ;
-            sh:path bacnet:week-n-day ],
+            sh:path bacnet:week-n-day ;
+            sh:pattern "^([1-9][0-9]*|[*]),([1-9][0-9]*|[*]),([1-9][0-9]*|[*])$" ],
         [ a sh:PropertyShape ;
             bacnet:comment "this is a long line of text"@en ;
             sh:datatype xsd:hexBinary ;
