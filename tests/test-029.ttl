@@ -13,44 +13,30 @@ bacnet:SomeSequence a sh:NodeShape ;
             sh:minCount 1 ;
             sh:path bacnet:some-unsigned ],
         [ a sh:PropertyShape ;
-            sh:class bacnet:SomeSequence.SomeRange ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
+            sh:node bacnet:SomeSequence.SomeRange ;
             sh:path bacnet:some-range ] .
 
 bacnet:SomeSequence.SomeRange a sh:NodeShape ;
     rdfs:label "SomeSequence.SomeRange" ;
     rdfs:subClassOf bacnet:Choice ;
     sh:xone ( [ sh:property [ a sh:PropertyShape ;
-                        sh:class bacnet:SomeSequence.SomeRange.ByPosition ;
                         sh:maxCount 1 ;
                         sh:minCount 1 ;
+                        sh:node bacnet:SomeSequence.SomeRange.ByPosition ;
                         sh:path bacnet:by-position ] ] [ sh:property [ a sh:PropertyShape ;
-                        sh:class bacnet:SomeSequence.SomeRange.BySequenceNumber ;
                         sh:maxCount 1 ;
                         sh:minCount 1 ;
+                        sh:node bacnet:SomeSequence.SomeRange.BySequenceNumber ;
                         sh:path bacnet:by-sequence-number ] ] [ sh:property [ a sh:PropertyShape ;
-                        sh:class bacnet:SomeSequence.SomeRange.ByTime ;
                         sh:maxCount 1 ;
                         sh:minCount 1 ;
+                        sh:node bacnet:SomeSequence.SomeRange.ByTime ;
                         sh:path bacnet:by-time ] ] ) .
 
 bacnet:SomeSequence.SomeRange.ByPosition a sh:NodeShape ;
     rdfs:label "SomeSequence.SomeRange.ByPosition" ;
-    rdfs:subClassOf bacnet:Sequence ;
-    sh:property [ a sh:PropertyShape ;
-            sh:datatype xsd:nonNegativeInteger ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:reference-index ],
-        [ a sh:PropertyShape ;
-            sh:datatype xsd:integer ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:count ] .
-
-bacnet:SomeSequence.SomeRange.BySequenceNumber a sh:NodeShape ;
-    rdfs:label "SomeSequence.SomeRange.BySequenceNumber" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
             sh:datatype xsd:integer ;
@@ -61,7 +47,21 @@ bacnet:SomeSequence.SomeRange.BySequenceNumber a sh:NodeShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:reference-sequence-number ] .
+            sh:path bacnet:reference-index ] .
+
+bacnet:SomeSequence.SomeRange.BySequenceNumber a sh:NodeShape ;
+    rdfs:label "SomeSequence.SomeRange.BySequenceNumber" ;
+    rdfs:subClassOf bacnet:Sequence ;
+    sh:property [ a sh:PropertyShape ;
+            sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:reference-sequence-number ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:integer ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:count ] .
 
 bacnet:SomeSequence.SomeRange.ByTime a sh:NodeShape ;
     rdfs:label "SomeSequence.SomeRange.ByTime" ;

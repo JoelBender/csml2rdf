@@ -8,17 +8,17 @@ bacnet:Range a sh:NodeShape ;
     rdfs:label "Range" ;
     rdfs:subClassOf bacnet:Choice ;
     sh:xone ( [ sh:property [ a sh:PropertyShape ;
-                        sh:class bacnet:Range.ByPosition ;
                         sh:maxCount 1 ;
                         sh:minCount 1 ;
+                        sh:node bacnet:Range.ByPosition ;
                         sh:path bacnet:by-position ] ] [ sh:property [ a sh:PropertyShape ;
-                        sh:class bacnet:Range.BySequenceNumber ;
                         sh:maxCount 1 ;
                         sh:minCount 1 ;
+                        sh:node bacnet:Range.BySequenceNumber ;
                         sh:path bacnet:by-sequence-number ] ] [ sh:property [ a sh:PropertyShape ;
-                        sh:class bacnet:Range.ByTime ;
                         sh:maxCount 1 ;
                         sh:minCount 1 ;
+                        sh:node bacnet:Range.ByTime ;
                         sh:path bacnet:by-time ] ] ) .
 
 bacnet:Range.ByPosition a sh:NodeShape ;

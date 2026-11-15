@@ -12,9 +12,9 @@ bacnet:TestChoice a sh:NodeShape ;
                         sh:maxCount 1 ;
                         sh:minCount 1 ;
                         sh:path bacnet:some-integer ] ] [ sh:property [ a sh:PropertyShape ;
-                        sh:class bacnet:TestSequence1 ;
                         sh:maxCount 1 ;
                         sh:minCount 1 ;
+                        sh:node bacnet:TestSequence1 ;
                         sh:path bacnet:some-sequence ] ] ) .
 
 bacnet:TestSequence1 a sh:NodeShape ;

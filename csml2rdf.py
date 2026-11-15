@@ -4,6 +4,7 @@ CSML to RDF
 import sys
 import re
 import argparse
+import os
 from functools import partial
 
 from typing import Any, Dict, Callable, List, Tuple, TypeVar
@@ -828,7 +829,9 @@ def timepattern_property_shape(sequence_uri, property_elem) -> BNode:
 
 
 def sequence_value_fn(reference_uri, sh_property):
-    graph.add((sh_property, SH["class"], reference_uri))
+    # nested values are untyped nodes, so check their structure with sh:node
+    # rather than requiring an rdf:type with sh:class
+    graph.add((sh_property, SH.node, reference_uri))
 
 
 @property_shape_fn("Sequence", None)
@@ -958,7 +961,9 @@ def define_sequence(elem, sequence_name: str) -> URIRef:
 @property_shape_fn("Choice", None)
 def choice_property_shape(reference_uri, sequence_uri, property_elem) -> BNode:
     sh_property = simple_path_shape(sequence_uri, property_elem)
-    graph.add((sh_property, SH["class"], reference_uri))
+    # nested values are untyped nodes, so check their structure with sh:node
+    # rather than requiring an rdf:type with sh:class
+    graph.add((sh_property, SH.node, reference_uri))
 
     return sh_property
 
@@ -1369,8 +1374,25 @@ parser.add_argument(
     action="store_true",
     help="retain the 'BACnet' name prefix (removed by default)",
 )
+parser.add_argument(
+    "--include",
+    action="append",
+    default=[],
+    metavar="TTL",
+    help="Turtle file merged into the output (may be repeated)",
+)
 args = parser.parse_args()
 retain_prefix = args.retain
+
+for include_file in args.include:
+    if not os.path.isfile(include_file):
+        parser.error(f"include file not found: {include_file}")
+
+if retain_prefix and args.include:
+    sys.stderr.write(
+        "warning: included Turtle is merged as-is, names in it do not get"
+        " the 'BACnet' prefix\n"
+    )
 
 # parse the CSML documents and get the root elements
 roots = []
@@ -1435,6 +1457,10 @@ for reference_type, sh_property in postponed_value_shapes:
         )
         continue
     value_shape_fns[reference_type](sh_property)
+
+# merge hand-written Turtle content, e.g. shapes not described in CSML
+for include_file in args.include:
+    graph.parse(include_file, format="turtle")
 
 # find the property identifiers and add a reference to the predicate used
 # for statements relating objects and property values

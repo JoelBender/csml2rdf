@@ -7,9 +7,9 @@ bacnet:TestSequence a sh:NodeShape ;
     rdfs:label "TestSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:class bacnet:TestSequence.Anon ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
+            sh:node bacnet:TestSequence.Anon ;
             sh:path bacnet:anon ] .
 
 bacnet:TestSequence.Anon a sh:NodeShape ;

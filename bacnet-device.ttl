@@ -1,0 +1,29 @@
+@prefix bacnet: <http://data.ashrae.org/bacnet/2024#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+bacnet:Device a rdfs:Class,
+        sh:NodeShape ;
+    rdfs:label "Device" ;
+    bacnet:comment "A BACnet device known by its network address, its device instance, or both"@en ;
+    sh:or ( [ sh:property [ a sh:PropertyShape ;
+                        sh:minCount 1 ;
+                        sh:path bacnet:device-address ] ] [ sh:property [ a sh:PropertyShape ;
+                        sh:minCount 1 ;
+                        sh:path bacnet:device-instance ] ] ) ;
+    sh:property [ a sh:PropertyShape ;
+            bacnet:comment "The network address of the device, local stations are network 0"@en ;
+            sh:maxCount 1 ;
+            sh:minCount 0 ;
+            sh:node bacnet:Address ;
+            sh:path bacnet:device-address ],
+        [ a sh:PropertyShape ;
+            bacnet:comment "The device object instance number, 4194303 is reserved as a wildcard"@en ;
+            sh:datatype xsd:nonNegativeInteger ;
+            sh:maxCount 1 ;
+            sh:maxInclusive 4194302 ;
+            sh:minCount 0 ;
+            sh:minInclusive 0 ;
+            sh:path bacnet:device-instance ] .

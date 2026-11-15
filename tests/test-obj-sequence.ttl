@@ -8,9 +8,9 @@ bacnet:AnalogInputObject a rdfs:Class,
     rdfs:label "AnalogInputObject" ;
     rdfs:subClassOf bacnet:Object ;
     sh:property [ a sh:PropertyShape ;
-            sh:class bacnet:ObjectPropertyReference ;
             sh:maxCount 1 ;
             sh:minCount 0 ;
+            sh:node bacnet:ObjectPropertyReference ;
             sh:path bacnet:event-algorithm-inhibit-ref ] .
 
 bacnet:PropertyIdentifier a rdfs:Class ;
@@ -31,11 +31,6 @@ bacnet:ObjectPropertyReference a sh:NodeShape ;
     rdfs:label "ObjectPropertyReference" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:class bacnet:PropertyIdentifierEnumerationValue ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:property-identifier ],
-        [ a sh:PropertyShape ;
             sh:datatype xsd:nonNegativeInteger ;
             sh:maxCount 1 ;
             sh:minCount 0 ;
@@ -45,5 +40,10 @@ bacnet:ObjectPropertyReference a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:object-identifier ;
-            sh:pattern "^[A-Za-z0-9-]+,(0|[1-9][0-9]*)$" ] .
+            sh:pattern "^[A-Za-z0-9-]+,(0|[1-9][0-9]*)$" ],
+        [ a sh:PropertyShape ;
+            sh:class bacnet:PropertyIdentifierEnumerationValue ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:property-identifier ] .
 
