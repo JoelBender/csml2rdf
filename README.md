@@ -48,6 +48,12 @@ references the generated `bacnet:Address` shape. Included Turtle is merged
 as-is, so it assumes the default names with the prefix removed. A warning is
 written to stderr when `--include` is combined with `--retain`.
 
+`ontology.ttl` contains the `owl:Ontology` declaration for
+`<http://data.ashrae.org/bacnet/2024>` with its title, description, version and
+preferred namespace prefix; include it so the output identifies itself as an
+ontology. Its version follows the BACnet standard: the year of the standard and
+a revision of this ontology within that year, for example `2024.1`.
+
 To regenerate the test outputs (which assume the prefix is removed):
 
     cd tests && uv run ./run-tests.sh
