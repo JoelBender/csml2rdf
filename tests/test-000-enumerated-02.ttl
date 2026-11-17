@@ -3,12 +3,29 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+bacnet:TestSequence.Enumerated a rdfs:Class ;
+    rdfs:label "TestSequence.Enumerated" ;
+    bacnet:memberClass bacnet:TestSequence.EnumeratedEnumerationValue ;
+    rdfs:subClassOf bacnet:EnumerationKind .
+
+bacnet:TestSequence.EnumeratedEnumerationValue a rdfs:Class ;
+    rdfs:label "TestSequence.EnumeratedEnumerationValue" ;
+    rdfs:subClassOf bacnet:EnumerationValue .
+
 bacnet:TestSequence a sh:NodeShape ;
     rdfs:label "TestSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:class bacnet:EnumerationValue ;
+            sh:class bacnet:TestSequence.EnumeratedEnumerationValue ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:enumerated ] .
+
+bacnet:TestSequence.Enumerated.direct a bacnet:TestSequence.EnumeratedEnumerationValue ;
+    bacnet:name "direct" ;
+    bacnet:value "0"^^xsd:nonNegativeInteger .
+
+bacnet:TestSequence.Enumerated.reverse a bacnet:TestSequence.EnumeratedEnumerationValue ;
+    bacnet:name "reverse" ;
+    bacnet:value "1"^^xsd:nonNegativeInteger .
 

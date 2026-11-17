@@ -4,6 +4,24 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+bacnet:Error.ErrorClass a rdfs:Class ;
+    rdfs:label "Error.ErrorClass" ;
+    bacnet:memberClass bacnet:Error.ErrorClassEnumerationValue ;
+    rdfs:subClassOf bacnet:EnumerationKind .
+
+bacnet:Error.ErrorClassEnumerationValue a rdfs:Class ;
+    rdfs:label "Error.ErrorClassEnumerationValue" ;
+    rdfs:subClassOf bacnet:EnumerationValue .
+
+bacnet:Error.ErrorCode a rdfs:Class ;
+    rdfs:label "Error.ErrorCode" ;
+    bacnet:memberClass bacnet:Error.ErrorCodeEnumerationValue ;
+    rdfs:subClassOf bacnet:EnumerationKind .
+
+bacnet:Error.ErrorCodeEnumerationValue a rdfs:Class ;
+    rdfs:label "Error.ErrorCodeEnumerationValue" ;
+    rdfs:subClassOf bacnet:EnumerationValue .
+
 bacnet:LogStatus a rdfs:Class,
         sh:NodeShape ;
     rdfs:label "LogStatus" ;
@@ -14,6 +32,30 @@ bacnet:LogStatusNamedBits a rdfs:Class ;
     rdfs:label "LogStatusNamedBits" ;
     rdfs:subClassOf bacnet:NamedBits .
 
+bacnet:Error.ErrorClass.device a bacnet:Error.ErrorClassEnumerationValue ;
+    bacnet:name "device" ;
+    bacnet:value "0"^^xsd:nonNegativeInteger .
+
+bacnet:Error.ErrorClass.object a bacnet:Error.ErrorClassEnumerationValue ;
+    bacnet:name "object" ;
+    bacnet:value "1"^^xsd:nonNegativeInteger .
+
+bacnet:Error.ErrorClass.property a bacnet:Error.ErrorClassEnumerationValue ;
+    bacnet:name "property" ;
+    bacnet:value "2"^^xsd:nonNegativeInteger .
+
+bacnet:Error.ErrorCode.abort-apdu-too-long a bacnet:Error.ErrorCodeEnumerationValue ;
+    bacnet:name "abort-apdu-too-long" ;
+    bacnet:value "123"^^xsd:nonNegativeInteger .
+
+bacnet:Error.ErrorCode.abort-application-exceeded-reply-time a bacnet:Error.ErrorCodeEnumerationValue ;
+    bacnet:name "abort-application-exceeded-reply-time" ;
+    bacnet:value "124"^^xsd:nonNegativeInteger .
+
+bacnet:Error.ErrorCode.abort-buffer-overflow a bacnet:Error.ErrorCodeEnumerationValue ;
+    bacnet:name "abort-buffer-overflow" ;
+    bacnet:value "51"^^xsd:nonNegativeInteger .
+
 bacnet:LogData.LogData a bacnet:SequenceOf ;
     bacnet:memberType bacnet:LogData.LogDataChoice .
 
@@ -21,15 +63,15 @@ bacnet:LogMultipleRecord a sh:NodeShape ;
     rdfs:label "LogMultipleRecord" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:node bacnet:LogData ;
-            sh:path bacnet:log-data ],
-        [ a sh:PropertyShape ;
             sh:datatype xsd:dateTime ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:timestamp ] .
+            sh:path bacnet:timestamp ],
+        [ a sh:PropertyShape ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:node bacnet:LogData ;
+            sh:path bacnet:log-data ] .
 
 bacnet:LogStatus.buffer-purged a bacnet:LogStatusNamedBits ;
     bacnet:bit "1"^^xsd:nonNegativeInteger ;
@@ -47,15 +89,15 @@ bacnet:Error a sh:NodeShape ;
     rdfs:label "Error" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:class bacnet:EnumerationValue ;
+            sh:class bacnet:Error.ErrorCodeEnumerationValue ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:error-class ],
+            sh:path bacnet:error-code ],
         [ a sh:PropertyShape ;
-            sh:class bacnet:EnumerationValue ;
+            sh:class bacnet:Error.ErrorClassEnumerationValue ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:path bacnet:error-code ] .
+            sh:path bacnet:error-class ] .
 
 bacnet:LogData a sh:NodeShape ;
     rdfs:label "LogData" ;

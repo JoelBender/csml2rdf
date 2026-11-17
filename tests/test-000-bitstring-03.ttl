@@ -4,6 +4,16 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
+bacnet:TestSequence1.SomeBitstring a rdfs:Class,
+        sh:NodeShape ;
+    rdfs:label "TestSequence1.SomeBitstring" ;
+    bacnet:memberClass bacnet:TestSequence1.SomeBitstringNamedBits ;
+    rdfs:subClassOf bacnet:Bitstring .
+
+bacnet:TestSequence1.SomeBitstringNamedBits a rdfs:Class ;
+    rdfs:label "TestSequence1.SomeBitstringNamedBits" ;
+    rdfs:subClassOf bacnet:NamedBits .
+
 bacnet:TestSequence1 a sh:NodeShape ;
     rdfs:label "TestSequence1" ;
     rdfs:subClassOf bacnet:Sequence ;
@@ -11,10 +21,18 @@ bacnet:TestSequence1 a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:path bacnet:some-bitstring ] ;
-    sh:xone ( [ sh:property [ sh:class bacnet:NamedBits ;
+    sh:xone ( [ sh:property [ sh:class bacnet:TestSequence1.SomeBitstringNamedBits ;
                         sh:minCount 1 ;
                         sh:path ( bacnet:some-bitstring [ sh:zeroOrMorePath rdf:rest ] rdf:first ) ] ] [ sh:property [ sh:hasValue () ;
                         sh:minCount 1 ;
                         sh:path bacnet:some-bitstring ] ] [ sh:property [ sh:maxCount 0 ;
                         sh:path bacnet:some-bitstring ] ] ) .
+
+bacnet:TestSequence1.SomeBitstring.monday a bacnet:TestSequence1.SomeBitstringNamedBits ;
+    bacnet:bit "0"^^xsd:nonNegativeInteger ;
+    bacnet:name "monday" .
+
+bacnet:TestSequence1.SomeBitstring.tuesday a bacnet:TestSequence1.SomeBitstringNamedBits ;
+    bacnet:bit "1"^^xsd:nonNegativeInteger ;
+    bacnet:name "tuesday" .
 

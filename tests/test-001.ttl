@@ -12,6 +12,15 @@ bacnet:ActionEnumerationValue a rdfs:Class ;
     rdfs:label "ActionEnumerationValue" ;
     rdfs:subClassOf bacnet:EnumerationValue .
 
+bacnet:TestSequence.AcknowledgmentFilter a rdfs:Class ;
+    rdfs:label "TestSequence.AcknowledgmentFilter" ;
+    bacnet:memberClass bacnet:TestSequence.AcknowledgmentFilterEnumerationValue ;
+    rdfs:subClassOf bacnet:EnumerationKind .
+
+bacnet:TestSequence.AcknowledgmentFilterEnumerationValue a rdfs:Class ;
+    rdfs:label "TestSequence.AcknowledgmentFilterEnumerationValue" ;
+    rdfs:subClassOf bacnet:EnumerationValue .
+
 bacnet:Action.direct a bacnet:ActionEnumerationValue ;
     bacnet:name "direct" ;
     bacnet:value "0"^^xsd:nonNegativeInteger .
@@ -24,11 +33,6 @@ bacnet:TestSequence a sh:NodeShape ;
     rdfs:label "TestSequence" ;
     rdfs:subClassOf bacnet:Sequence ;
     sh:property [ a sh:PropertyShape ;
-            sh:class bacnet:EnumerationValue ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:path bacnet:acknowledgment-filter ],
-        [ a sh:PropertyShape ;
             sh:datatype xsd:integer ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
@@ -37,5 +41,22 @@ bacnet:TestSequence a sh:NodeShape ;
             sh:class bacnet:ActionEnumerationValue ;
             sh:maxCount 1 ;
             sh:minCount 0 ;
-            sh:path bacnet:action ] .
+            sh:path bacnet:action ],
+        [ a sh:PropertyShape ;
+            sh:class bacnet:TestSequence.AcknowledgmentFilterEnumerationValue ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path bacnet:acknowledgment-filter ] .
+
+bacnet:TestSequence.AcknowledgmentFilter.acked a bacnet:TestSequence.AcknowledgmentFilterEnumerationValue ;
+    bacnet:name "acked" ;
+    bacnet:value "1"^^xsd:nonNegativeInteger .
+
+bacnet:TestSequence.AcknowledgmentFilter.all a bacnet:TestSequence.AcknowledgmentFilterEnumerationValue ;
+    bacnet:name "all" ;
+    bacnet:value "0"^^xsd:nonNegativeInteger .
+
+bacnet:TestSequence.AcknowledgmentFilter.not-acked a bacnet:TestSequence.AcknowledgmentFilterEnumerationValue ;
+    bacnet:name "not-acked" ;
+    bacnet:value "2"^^xsd:nonNegativeInteger .
 

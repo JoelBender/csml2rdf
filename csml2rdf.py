@@ -67,10 +67,20 @@ def value_shape_fn(elem_name: str, *args) -> Callable[[ValueShapeFn], ValueShape
     return value_shape_fn_decorator
 
 
+# definitions whose simplified name would collide with another definition,
+# 0-Error (the error-class and error-code sequence) and 0-BACnet-Error (the
+# choice of service specific errors) would both be "Error"
+NAME_OVERRIDES = {
+    "0-BACnet-Error": "ErrorChoice",
+}
+
+
 def normalize(name: str) -> str:
     """
     Simplify names.
     """
+    if not retain_prefix and name in NAME_OVERRIDES:
+        return NAME_OVERRIDES[name]
     if name.startswith("0-"):
         name = name[2:]
     if not retain_prefix and name.startswith("BACnet"):
@@ -919,6 +929,22 @@ def define_sequence(elem, sequence_name: str) -> URIRef:
             # now there is a shape function for it
             sh_property = property_shape_fns[child_type_name](sequence_uri, child_elem)
 
+        elif (
+            child_elem.tag == "Enumerated" and child_elem.find("NamedValues") is not None
+        ) or (child_elem.tag == "BitString" and child_elem.find("NamedBits") is not None):
+            # an enumeration or bit string defined inline, give it a type name
+            # based on the sequence name and the child name like the inline
+            # choices and sequences, RouterEntry.Status
+            child_type_name = (
+                sequence_name
+                + "."
+                + "".join(word[0].upper() + word[1:] for word in child_name.split("-"))
+            )
+            define_fns[child_elem.tag](child_elem, child_type_name)
+
+            # now there is a shape function for it
+            sh_property = property_shape_fns[child_type_name](sequence_uri, child_elem)
+
         elif child_elem.tag in property_shape_fns:
             # child type describe in tag
             sh_property = property_shape_fns[child_elem.tag](sequence_uri, child_elem)
@@ -1417,6 +1443,10 @@ graph.bind("sh", SH)
 # document can be reported
 definition_sources: Dict[str, str] = {}
 
+# the definition that each simplified name came from, so two definitions that
+# simplify to the same name (and would be merged) can be reported
+normalized_sources: Dict[str, str] = {}
+
 for source, root in zip(args.files or ["<stdin>"], roots):
     for x in root.xpath("/CSML/Definitions"):
         for y in x:
@@ -1431,6 +1461,16 @@ for source, root in zip(args.files or ["<stdin>"], roots):
                     f" in {definition_sources[definition_name]}\n"
                 )
             definition_sources[definition_name] = source
+
+            normalized_name = normalize(definition_name)
+            other_name = normalized_sources.get(normalized_name)
+            if other_name and other_name != definition_name:
+                sys.stderr.write(
+                    f"warning: {definition_name} and {other_name} are both"
+                    f" {normalized_name}\n"
+                )
+            normalized_sources[normalized_name] = definition_name
+
             define_fns[y.tag](y, "")
 
 for child_type, sequence_uri, child_elem in postponed_property_shapes:
