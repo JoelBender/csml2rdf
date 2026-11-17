@@ -27,7 +27,7 @@ taken from an earlier combined CSML document (Protocol_Revision 19).
 Dependencies are managed with [uv](https://docs.astral.sh/uv/):
 
     uv sync
-    uv run python csml2rdf.py --include bacnet-device.ttl bacnet-data-types.xml bacnet-object-types.xml virtual-terminal.xml > bacnet.ttl
+    uv run python csml2rdf.py --include bacnet-device.ttl --include ontology.ttl bacnet-data-types.xml bacnet-object-types.xml virtual-terminal.xml > bacnet.ttl
 
 The definitions in all of the CSML documents given on the command line are
 combined before converting, so references from one document to types defined
@@ -47,6 +47,12 @@ with a `bacnet:device-address` and/or a `bacnet:device-instance`; it
 references the generated `bacnet:Address` shape. Included Turtle is merged
 as-is, so it assumes the default names with the prefix removed. A warning is
 written to stderr when `--include` is combined with `--retain`.
+
+`ontology.ttl` contains the `owl:Ontology` declaration for
+`<http://data.ashrae.org/bacnet/2024>` with its title, description, version and
+preferred namespace prefix; include it so the output identifies itself as an
+ontology. Its version follows the BACnet standard: the year of the standard and
+a revision of this ontology within that year, for example `2024.1`.
 
 To regenerate the test outputs (which assume the prefix is removed):
 
